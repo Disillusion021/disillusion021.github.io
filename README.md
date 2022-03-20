@@ -4,7 +4,7 @@
         <img src="https://cdn.jsdelivr.net/gh/justacoder99/r2coding@master/img/r2coding_logo_index.15y992dieibg.png" width=""/>
     </a>
 </p>
-<a href="./JavaWeb/Swagger.md">W3School</a>
+<a href="./JavaWeb/Swagger.html">Swagger</a>
 
 <p align="center">
   <a href="https://github.com/rd2coding/Road2Coding" target="_blank"><img src="https://img.shields.io/badge/Github-r2coding-red.svg"></a>
