@@ -1,0 +1,199 @@
+1、Spring框架：
+    - 框架:前辈解决一些复杂问题的时候总结出来的最佳实践方案！
+
+    - 框架是公司开发出来的解决一些特定问题的代码（jar包） 导入jar包
+
+    - mybatis的缺点是什么？
+        - xml
+        - sql语句
+        - 测试
+
+        码农吧（在线互联网教育） ： 购买收费的框架（B栈）
+
+        虎牙、斗鱼、爱奇艺、土豆、腾讯视频（互联网技术型公司）
+
+        阿里巴巴  java、php、C
+
+        oracle、sun公司（james green）、linux（大学生）
+
+        java收费：对外发布部分功能开源
+
+    源码：1万       4.5万
+2、spring是一个开源绿色的框架,容器框架。
+
+3、spring的作用：管理对象生命周期。
+    - 获取对象：
+        ① new
+        ② 工厂设计模式
+
+    - spring管理对象：对象放到spring当中
+
+4、spring的开发流程：
+    - 导入jar包
+
+    - xml配置文件：描述spring接管的对象的信息
+
+    - 创建一个spring的容器对象，读取配置文件，配置文件信息创建bean对象
+
+    - 容器对象.getBean() 获取容器当中对象信息
+
+5、当当网的买书：
+    book
+    isbn    book_name   price   stock
+    1001    java        50      10
+    1002    红楼梦       100     20
+
+    book_stock
+    isbn    stock
+    1001    10
+    1002    20
+
+    account
+    username    balance
+    tom         60
+
+    ① 查看库存
+
+    ② 修改库存
+    ③ 查询余额
+    ④ 查询单价
+    ⑤ 修改余额
+
+
+
+    用户表User
+    id      name      password      nick_name       introduce      balance       score       vip    ....................
+
+    用户基本表
+    id      name      password      nick_name       introduce
+
+    用户余额表
+    id      balance     score           vip
+
+    热数据:
+
+    冷数据：
+
+    商品表item
+    id      name    stock   introduce   discount   price ..................
+
+
+6、开发思想：
+    - oop：面向对象编程 Orient Object Program
+
+    - orm：对象关系映射 Object Relative Mapping 表、行、列----> 对象
+
+    - ioc：控制反转    Inversion Of Controller.
+        反转资源获取的方向，以往我们是主动的创建对象，告知Spring容器需要什么样的对象，Spring把这个对象推送给我们。
+
+        买报纸： 报摊。        报箱：
+
+        订餐：   自己饭店，告诉我要什么菜。等着，打包结束。
+
+        美团：
+    - DI: Dependcy Inject 依赖注入（注入就是赋值的意思）,spring的配置文件当中如果需要描述一个对象，设置属性
+        ① 依赖set方法注入属性值  <property>
+        ② 依赖构造器注入属性     <constructor-arg>
+
+    重要： IOC和DI描述的是一件事情（伏笔）
+
+
+7、spring的bean的配置：
+    - id具有唯一性：
+
+    - id可以省略：id默认是全类名
+
+    - spring容器：
+        ApplicationContext
+
+        ClasspathXmlApplicationContext      FileSystemXmlApplicationContext
+
+
+    - 从容器当中获取bean：
+        ApplicationContext
+            getBean(String name) : Object
+            getBean(类型.class)   : 类型
+    - 依赖注入：在配置bean的时候，如何告知spring配置bean的属性值是什么！
+        - set方法注入
+            <bean>
+                <property name="属性" value="值"></property>
+            </bean>
+
+        - 构造器注入
+
+    value当中写的所有的值都是字符串！（字面量）
+
+    java当中类和类存在什么样的关系：
+    - 继承 ： is-a             Dog extends Anialm
+    - 聚合 :  has-a           Person has a Dog
+
+            public class Person{
+                private String name;
+                private Dog dog;
+
+            }
+
+    - 引用其他bean：一个bean当中有一个成员变量属性是另外一个bean
+        <bean id="s1" class="com.group13.pojo.Student" autowire="byName">
+            <property name="id" value="1"></property>
+            <property name="name" value="诸葛亮"></property>
+            <property name="age" value="12"></property>
+            <property name="car" ref="car"></property>
+        </bean>
+
+        <bean id="car" class="com.group13.pojo.Car">
+            <property name="type" value="奔驰"></property>
+            <property name="auto" value="2.5"></property>
+        </bean>
+
+    - 自动装配： bean当中加入属性autowire=""
+
+        - byType : 按照属性的类型取容器当中寻找是否与当前属性一致类型的bean，bena是单例。
+
+        - byName
+
+    Student s = new student();
+    s.setName();
+    ...........;
+
+    ...........;
+8、spring关于bean的配置的方式：
+    - xml ：
+        <bean id="" class="">
+            <property>
+        </bean>
+    - 注解 ：修饰类型，容器只能创建一个类的对象
+        @Component      : 普通的类
+        @Controller
+        @Service        ：业务类型
+        @Repository     ：操作数据库dao和mapper
+
+        @Repository
+        public interface BookMapper{
+
+
+        }
+
+        @Value
+
+        修饰类，类的上面加入四个注解，让当前Spring容器创建类的对象 <bean>
+
+        类不是你自己写，框架内部现有的类！
+
+    - 硬编码（代码的方式扔到容器当中）
+	@Configuration
+	@Bean
+        类里面有工厂方法，创建对象
+
+
+9、Spring默认不启动注解（必须启动组件扫描，spring要对哪一个包进行组件扫描）
+    - Component ： 组件，Spring当中，构成当前应用系统的对象，就叫做组件。应用系统的组成部分
+
+10、Spring：背书很强大。 强大的公司   基于Spring 开发出来所有框架
+
+    - mybatis、jdbc、spring jdbc
+
+    spring jdbc ： 操作数据库  提供了一个类型JdbcTemplate
+
+
+

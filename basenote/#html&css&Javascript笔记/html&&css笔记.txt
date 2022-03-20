@@ -1,0 +1,323 @@
+样式抽离
+<link rel="stylesheet" type="text/css" href="content.css" />
+js抽离
+<script type="text/javascript" src="app.js"></script>
+Html5规范中， script 的 type 属性默认是 text/javascript
+
+1、前端（User Interface）用户接口：
+
+2、前端知识体系：
+	- html
+	- css
+	- JavaScript
+	- JQuery
+	- EcmaScript 6
+	- Vue.js、Angular.js、React.js、Node.js
+	
+3、html ： hyper text marked language 超文本标记语言
+	- 作用： 可以通过标记（标签）来展示页面当中的内容
+	
+	- 新的语言： java、sql、xml、html
+	
+4、html语言书写的源代码：浏览器（EcmaScript核心翻译器标签翻译成页面当中的元素）
+
+5、html（网页）：
+	- 文件的类型： .html或者是.htm
+	
+	- 结构：
+		
+		<html>
+			<head>
+				<meta charset="utf-8">
+				
+				<title></title>
+			</head>
+			<body>
+				
+			</body>
+		</html>
+		
+		说明：
+		head：设置网页当中全局信息
+		body：页面当中展示的内容
+		
+		标签：
+			- 大部分的标签都是成对出现
+				<标签名></标签名>
+			- 还有一部分标签不需要加结束标签
+				<meta>
+				
+6、w3cschool教程：百度当中 w3cschool html
+	- 标签： 页面当中展示的内容可以通过<标签名></标签名>
+	
+		<标签 属性="" 属性=""></标签>
+		
+	- 标题标签：h1、h2、.....、h6
+	
+	- 段落：p
+	
+	- 超级链接 : a标签 <a href="">百度</a>
+	
+	- 图片:
+		<img src=""/>
+	- 表格：学号、姓名、学校
+		- 作用：
+			- 标准化的格式展示数据
+			- 页面的排版
+			
+		- 表格标签 
+		<table width = "500px" border = "1px">table有单元格宽度属性和边框属性
+		<table>
+			<caption>表格标题</caption>
+			<thead>
+				<th>编号</th>
+				<th>姓名</th>
+				<th>学校</th>
+			</thead>
+			<tbody></tbody>
+			<tfooter></tfoooter>
+		</table>
+	- 列表：展示多个数据,非常的重要。页面当中看到的有一定顺序的多个值。导航
+		① 无序列表：没有前缀
+			<ul>
+				<li>
+					<b>我爱你中国</b>
+				</li>
+			</ul>
+		② 有序列表：
+			<ol>
+				<li></li>
+			</ol>
+	- 文本标签（都不常用）：
+		<b>我爱你中国</b>
+		<i>我爱你中国</i>
+		<u>我爱你中国</u>
+		<font></font>
+	- 表单标签： 用户需要操作的一些元素（标签），必须放置到表单标签当中
+		用户可以操作的元素（文本框、密码框、复选框、单选按钮、下拉列表.....），控件
+		
+		当我们点击了form表单当中的提交按钮，表单里面控件值传递给action对应的资源
+		<form action="">
+			
+		</form>
+		
+		- input : 和img、meta一样，都是一个独立标签
+			<input type=""/>
+			type：
+				- text
+				- password
+				- color
+				- date
+				- checkbox 复选按钮
+				- radio 单选按钮 当一组radio设置name属性一致时，会产生互斥性
+				- hidden : 重要。 隐藏文本域（隐藏的文本框）
+				
+				- submit : 提交按钮，配合着form表单，将表单提交给action属性对应的资源
+				- button : 普通按钮，点击之后没有任何的反映。 JavaScript让当前按钮做一些事情，伏笔
+				- reset  : 重置按钮，清空form表单当中空间的值，改为默认值！
+			input标签的通用属性：
+				maxLength=""
+				placeHolder="" 文本框默认值
+				value="" 当前控件的值（非常重要的属性）
+				name=""  控件定义名字（比较重要）
+				
+		- 下拉列表：
+			<option>中的value属性是下拉列表中的值。
+			<select>
+				<option value=""></option>
+				<option></option>
+			</select>
+		- 文本域：<textarea></textarea>
+		
+7、标签（元素）分类：
+	- 行级元素（块级元素） : 当前标签沾满一行
+		h1-h6、table、ul、li、p
+	- 内联元素: 
+		img、a、input
+		
+8、div ： 装载html代码的容器 （图层） 默认宽和高全部都是0，背景颜色是透明色
+	- 网页布局
+	
+	- 悬浮在页面当中的一个块
+	
+	- 行级元素
+	
+9、span ： 装载文本的容器
+	- 内联。
+
+10、CSS ： 样式表 设定元素的风格
+	- 行间样式 ： html当中所有的元素共同的属性 style
+		<标签 style="样式名:样式值;样式名:样式值;"></标签>
+	
+	- 简单选择器
+		① id选择器的样式表： 所有的标签都有一个通用的属性id
+			当一个元素的样式
+					#样式名{
+						
+					}
+		② class选择器的样式表： 所有的标签都有一个通用的属性class
+			当多个元素样式一致的情况，让这些元素的class属性是一个。 
+					.样表名{
+						
+					}
+		
+		③ 元素选择器样式
+	- 组合选择器：
+		选择器1 选择器2  后代选择器
+		选择器1>选择器2  子选择器
+		选择器1+选择器2  相邻兄弟选择器具
+		选择器1~选择器2	通用兄弟选择器
+	- 伪类选择器：
+		选择器:hover{
+			
+		}
+		
+		选择器:active{
+			
+		}
+		选择器:first-child{
+			
+		}
+		选择器:last-child{
+			
+		}
+
+	- 属性选择器：元素[属性="***"]{} 通过属性筛选元素套用样式
+	行间样式 > id > class > 元素				如果四种样式同时作用某一个元素，四种样式整合在一起
+	
+	如果样式表中出现相同样式的，优先级的概念
+		
+	说明：html规范当中，在同一个页面当中最好不要相同的id值
+	
+	div>a{
+		
+	}
+	
+	<div>
+		<ul>
+			<li>
+				<a></a>
+			</li>
+		</ul>
+		
+		<a></a>
+	</div>
+11、样式名：
+	- 背景：background
+		- background-color : 颜色
+		- background-image : 背景图片 url(图片的地址)
+		- background-repeat: 平铺 repeat-x repeat-y no-repeat
+		- background-position: 横坐标移动距离 纵坐标
+		- background:复合的样式
+		
+	- 边框： border
+		css设定边框时必须设定边框宽度，边框类型，边框颜色，缺一不可。
+		- border-width : 边框的宽度
+		- border-style  : 类型
+		- border-color : 颜色
+		
+		- border: 复合样式
+		
+		- border-radis: 圆角边框，四个角半径
+		
+		- border-left-width.................
+		- border-left: ...........   .....
+
+	-轮廓：outline 在border外面有添加了一圈轮廓
+	
+	- 外边距:margin
+		- margin-left:
+		- margin-right:
+		- margin-top:
+		- margin-bottom:
+		
+		- margin: 也是一个复合样式
+			margin: 1px 2px 3px 4px    上	右    下   左
+			margin: 1px 2px			   上下		左右
+			margin: 1px				   上下左右
+			
+		非常重要的知识点： 行级元素水平居中
+			margin: 10px auto;
+	- 内边距 : 元素内部的文本距离他边距
+		- padding:
+		- padding-left:
+		- padding-right:
+		- padding-top:
+		- padding-bottom:
+		- padding: 1px 2px 3px 4px 
+		
+	- 居中：
+		- 水平居中：
+			- 元素居中：
+				- 行级元素： margin: 上下 auto;
+				- 内联元素: 
+					- 内联外部改成行级元素，然后用margin来居中
+					- 包裹内联元素的父元素可以设置text-align或者<center></center>
+			- 元素内部的文本居中
+				- text-align： left和right、center
+				
+			- <center></center> 用它包裹文本也好，标签也好，都可以水平居中
+		- 垂直居中： 元素内部文本垂直居中
+			- line-height:设置行高和图层高度一致即可垂直居中
+	- 高度和宽度：
+		- width: 100px;		1%,100%;
+		
+		- height: 不允许设置百分比
+	- 字体： font
+		引用字体
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+		- font-size 
+		- font-style 
+		- font-family: sans-serif
+		- font也是一个复合样式：20px 宋体 normal;
+		font: 字体 大小 斜体
+	
+	- 文本：
+		color： 文本颜色
+		text-align：内部的文本居中
+		text-decoration：none则为取消下划线
+		
+	- 列表：list
+		list-style-type：设置为none则取消列表前缀。
+		
+	- 行级元素和内联元素的转换：
+		如何将一个行级元素转换为内联元素
+		
+		- display : block   块级元素（行级元素）
+		- display : inline	内联了
+		- div: div比较特殊, inline-block可以改成内联, inline不可以把div从行级改成内联元素。
+	- float : left 浮动方式改为向左浮动 所有块级元素都可以通过float改成内联
+	
+	- cursor : 某一个元素修改cursor相当，当鼠标移入到当前元素的时候，鼠标的样式
+	
+	- 定位样式(绝对定位) (很low的一个功能)：
+		position: absolute;
+		top: 100px;
+		right: 100px;
+		left: 100px;
+		bottom: 100px;
+		
+
+
+------------------------------------------------
+
+1、
+
+2、
+博客表
+主键		标题		博客内容		博主ID		类别ID		
+1		java	java是..		101			#1#2#3#
+博主表
+主键		博主名字
+101		诸葛亮
+201		司马懿
+类别表
+类别id	类别名称
+1		技术
+2		黑客
+3		安全
+4		框架
+5		前端
+
+service层定义方法得到一个博客信息
+博客标题、内容、博主名字、类别名称字符串

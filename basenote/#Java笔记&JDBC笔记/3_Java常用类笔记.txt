@@ -1,0 +1,184 @@
+1. String类的底层是什么？(☆☆☆)
+	String类其实是Java自定义的基于char类型的引用数据类型，底层是一个不可变的char数组！换言之：每一个定义出来的字符串数据都是唯一且不可变的，这个字符串数据存储在方法区中！(简单来说：String类是一种字符串常量类型！任何修改或者替换字符串的行为都不是基于原有字符串的基础上修改，而是生成新的字符串表示修改之后的结果！)
+
+2. 什么是char类型？
+	char类型是Java中八大基本数据类型之一，char类型表示字符，字符在Java中通过单引号声明，并且字符只能容纳一个长度的数据！
+	char在Java中的另一层含义表示字符集编码，Java将所有字符集编码表中的数据都存储到char类型中！
+	字符集编码其实就是当时人们设置的一种可以让计算机识别英文数据的规则，由于计算机只能识别二进制，所以当时人们设置了一种表，规定了每个英文、数字、符号对应的十进制整数，再通过十进制整数转换为二进制整数就可以让计算机识别！
+	最早的字符集编码称为ASCII编码表，人们一共录入了128个数据！但是只能识别英文，于是乎，人们纷纷基于ASCII编码表的基础上，进行了扩充，将本国的语言加入到编码表中，当时衍生出了很多中编码表！中国就出现了几个典型的编码表：gbk、gb2312。后来人们为了统一编码表，于是乎将所有的国家文字统一录入到一个全新编码表中，这个编码表就称为UTF-8编码表。(UTF-8编码表共65535个长度！)
+	
+3. 如何将char和int之间进行转换？(☆☆☆)
+	(1). int --> char
+		(char) 整数;
+
+	(2). char --> int
+		(int) 字符;
+
+4. String类中的常用方法？(☆☆☆☆☆)(背下来！！)
+	String类中的常用方法基本上都是为了处理字符串衍生而来的！
+	(1). length()：返回字符串的长度！(☆)
+	(2). charAt(int index)：返回原字符串指定索引出对应的char数据！
+	(3). indexOf(char c)：返回指定参数字符在原字符串中首次出现的位置！(如果没出现则返回-1)
+	(4). indexOf(String s)：返回指定参数字符串在原字符串中首次出现的位置！(如果没出现则返回-1)
+	(5). lastIndexOf(String s)：返回指定参数字符串在原字符串中最后一次出现的位置！(如果没出现则返回-1)
+	(6). contains(String s)：判断原字符串中是否包含指定字符串(☆)
+	(7). toCharArray()：将字符串转换为char数组后返回
+	(8). toUpperCase()：将字符串中所有的英文大写处理并返回新的结果！
+	(9). toLowerCase()：将字符串中所有的英文小写处理并返回新的结果！
+	(10). subString(int begin)：将原字符串从指定位置开始进行截取并返回新的结果！
+	(11). subString(int begin, int end)：将原字符串从指定位置开始到指定位置结束进行截取并返回新的结果！(☆)
+	(12). replace(char old, char new)：将原字符串中指定字符替换，并返回新的字符串结果
+	(13). replace(String old, String new)：将原字符串中指定字符串替换，并返回新的字符串结果(☆)
+	(14). startsWith(String s)：判断指定字符串是否是原字符串前缀
+	(15). endsWith(String s)：判断指定字符串是否是原字符串后缀
+	(16). trim()：去除原字符串前后两端空白并返回新的结果
+	(17). split(String regex)：根据指定的字符串或者正则表达式将原字符串分割！返回字符串数组！(☆)
+	(18). valueOf(int i)：将参数整数转换为字符串并返回！
+
+5. String类构建对象的形式有哪些？(☆☆☆)
+	String类是系统提供的一种很特殊的类，他构建对象的形式有两种！
+	(1). 直接赋值法：构建了一个对象，存在一层引用关系！
+		String s1 = "abc";
+
+	(2). new对象法：构建了两个对象，存在两层引用关系！
+		String s2 = new String("abc");
+
+6. ==和equals到底比较的方式有什么区别？(☆☆☆☆☆)
+	==：比较变量在栈中存放的数据！(==更适用于比较基本数据类型！)
+		基本类型变量：==比较的是值
+		引用类型变量：==比较的是地址
+	equals：(equals更适用于比较引用数据类型！)
+		情况1：不重写equals，默认使用==进行比较
+		情况2：重写equals，自定义比较规则
+
+7. 什么是Object类？(☆☆)
+	Java中规定在构建子类对象之前必须先构建其父类对象，如果没有父类对象，则无法构建子类对象。而Object类就是被设计成所有类的父类，即：Java中规定，一个类在没有继承任何其他类的时候，默认以Object类作为父类！
+	Object类中有两个常用方法：toString、equals
+
+8. 什么是toString()方法？toString()方法的作用是什么？(☆☆☆☆)
+	当我们直接输出某个对象时，对象会自动调用Object类中提供的toString()方法以字符串形式展示对象信息，但是Object类中默认会显示地址，这时我们可以通过重写toString()方法来自定义输出对象的展示形式！(IDEA中允许自动生成toString())
+
+9. 什么是equals()方法？equals()方法的作用是什么？(☆☆☆☆☆)
+	equals方法被设定用于比较引用类型之间的数据是否相等，但是由于引用类型结构过于复杂，不同类型比较规则会不一样，所以Object类中干脆没有直接声明具体比较规则，而是默认使用==进行比较，为了建议子类通过重写equals方法的形式自定义比较规则！
+
+10. StringBuffer和StringBuilder类是什么类？和String类有什么区别？(☆☆☆)
+	StringBuffer和StringBuilder类是Java1.5版本之后出现的用于操作字符串数据的类，本质上和String类类似，都是用于容纳字符串数据(他们和String没有任何继承关系！)
+	StringBuffer和StringBuilder类的出现就是为了弥补String类的缺陷(不是为了替代！)
+	(1). 构建对象形式不同
+		String类：两种构建对象的形式！
+        		String s1 = "abc";
+		StringBuffer / StringBuilder：只能通过new的形式构建对象
+        		StringBuffer s2 = new StringBuffer("abc");
+        		StringBuilder s3 = new StringBuilder("abc");
+
+	(2). 操作字符串形式不同：提供的方法不同！
+		例如：以拼接的形式而言，String类直接通过加号拼接，但是另外两个类需要通过append方法进行拼接！
+
+	(3). 内存结构不同
+		String类：每一次拼接/替换，都是生成新的字符串结果！
+		StringBuffer / StringBuilder：每一次拼接/替换，都是基于原有字符串上进行操作！(相对来说，比String类更加节约内存！)
+
+	总结：String好，还是StringBuffer/StringBuilder好？都好！
+		String优势：定义简单，操作简单
+		StringBuffer / StringBuilder：反复拼接/修改时，更加节约内存！
+
+11. StringBuffer和StringBuilder类有什么区别？(☆☆☆☆)
+	StringBuffer：多线程情况下线程安全，操作效率较低
+	StringBuilder：多线程情况下线程不安全，操作效率高
+
+	总结：工作中用StringBuilder好？还是StringBuffer好？看情况！
+		单线程操作一定选StringBuilder
+		多线程操作首选StringBuilder，但是真的出现线程不安全的情况，可以通过循环的行为重新让程序执行，一直到线程安全为止！
+	
+	StringBuffer s1 = new StringBuffer("abc");
+
+	小A：查看s1是"abc"   	拼接123数据   	查看结果"abc123456"
+	小B：查看s1是"abc" 	拼接456数据  	查看结果"abc123456"
+
+12. 什么是包装类？(☆☆☆)
+	Java中共有两种数据类型：基本、引用类型
+	对于基本类型而言，他们是无法构建对象的，所以所有基本类型变量也无法调用方法！为了弥补基本类型无法调用方法的缺陷，Java开发者引入了包装类的概念，目的就是为了将基本数据包装转换为对应的引用数据类型，为了能够调用方法！
+	这些方法都是用于基本类型和引用类型之间相互转换的方法！
+
+	八大基本类型对应的包装类类型分别如下：
+	byte		Byte
+	short		Short
+	int 		Integer
+	long		Long
+	float		Float
+	double		Double
+	boolean		Boolean
+	char		Character
+
+	如何将字符串转换成整数数据？
+		Integer.parseInt(字符串)
+	如何将字符串转换成小数数据？
+		Double.parseDouble(字符串)
+
+	包装类 --> String
+	Integer i = 100;
+	//方式1
+	String str1 = i + "";
+	//方式2
+	String str2 = i.toString();
+	//方式3
+	String str3 = String.valueOf(i);
+
+	String --> 包装类
+	String str4 = "12345";
+	//方式1
+	Integer i1 = Integer.parseInt(str4);
+	//方式2
+	Integer i2 = new Integer(str4); 		构造器的底层也是parseInt方法
+	//方式3
+	Integer i3 = Integer.valueOf(str4);	valueOf的底层就是parseInt方法，parseInt返回int类型，valueOf返回Integer包装类型
+	
+13. 什么装箱？什么是拆箱？(☆☆)
+	包装类本质上和基本类型是互通的！
+	装箱：将基本类型转换为对应的引用类型
+		int a = 10;
+        		Integer b = a;
+	自动装箱的底层是 valueOf()方法		Double d = 100d; //体现了自动装箱，底层就是用 Double.valueOf(100d);
+	拆箱：将引用类型转换为对应的基本类型
+		Integer a = 10;
+		int b = a;
+	自动拆箱的底层是intValue()方法
+14. Java访问修饰符有哪些？访问修饰符的访问范围有哪些？(☆☆☆☆☆)
+	Java的访问修饰符就是用来控制被修饰的内容的访问权限和范围！
+	访问修饰符可以修饰如下内容：
+	(1). 成员变量(不能修饰局部变量)(四个都可以)
+	(2). 方法(四个都可以)
+	(3). 构造方法(四个都可以)
+	(4). 类(public和package可以！)
+	(5). 抽象方法(package、protected、public可以！)
+	(6). 接口中的常量和抽象方法必须是公开的！(换言之：接口中所有的内容必须都是公开的)
+
+				本类		本包		跨包(继承)		跨包
+	private(私有的)		 √		 ×		    ×		 ×
+
+	package(默认的)		 √		 √		    ×		 ×
+
+	protected(受保护的)	 	√		 √		    √		 ×
+	
+	public(公开的)		 √		 √		    √		 √
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	

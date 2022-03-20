@@ -1,0 +1,57 @@
+1、mybatis-plus: 基于jdbc的持久层ORM框架，mybatis-plus对于mybatis的扩展。
+
+2、mybatis-plus: 简化开发
+    - 只做增强不做改变，引入它不会对现有工程产生影响，如丝般顺滑。
+
+    - 只需简单配置，即可快速进行"单表" CRUD 操作，从而节省大量时间
+
+    - 代码生成、物理分页、性能分析等功能一应俱全。
+3、使用流程：
+    - 导入依赖:mybatis-plus-boot-starter
+    - 配置：mybatis是一模一样， mybatis-plus:
+    - 使用
+4、MyBatis-Plus对于Mapper层的封装： BaseMapper<T>
+    - select:查询
+        - selectList
+        - selectById
+        - selectOne
+        - selectObjs
+        - selectPage：重要
+            IPage<T> selectPage(IPage<T>,Wrapper);
+            Page<T> :
+                - current
+                - records
+                - size
+                - total
+	分页查询mp默认不开启，需要随便在哪个地方(一般建个config包)里写个配置类MyBatisPlusConfig，加上注解@Configuration
+	再在配置类里写个拦截器PaginationInterceptor工厂方法返回，用@Bean注解加入到Spring Bean容器中就行
+        List<Blog> selectBlog(int beginIndex,int size);
+
+        Service:
+    - insert:
+
+    - update:
+
+    - delete:删除
+5、MyBatis-plus ： Service进行封装
+    mapper: int
+    service : 有一个接口！ IService
+
+    查询：
+        - get
+        - list
+        - page: 参照mapper层的封装
+        - count: 查数量
+    插入：
+        - save
+
+    删除：
+        - remove
+
+    修改：
+        - update
+
+6、常用注解：
+    - @TableName(value="表名")
+    - @TableId(value="",type=IdType.Auto)
+    - @TableField()

@@ -1,0 +1,288 @@
+1、学习方式：
+    - 是什么？
+    - 有什么用？
+    - 怎么用？
+2、MySQL：关系型数据库（表、行、列）
+
+3、MySQL：
+    操作MySQL的客户端：
+        - Navicat：可视化界面
+
+        - JDBC: Java DataBase Connection。java操作mysql的客户端。
+
+4、JDBC：Java 开发智能家居，太阳微电子（詹姆斯格林）。
+    C语言比作超级网红。使用的人员特别多。
+
+    Java：开源、绿色、免费、跨平台。 让大量的开发人员Java。超级网红
+    接口：一系列API Application Interface
+
+    MySQL、DB2、Oracle、Access......., 寻求与Java的合作，
+    - 记载驱动
+    - 创建连接
+        Connection connection = DriverManager.getConnection(url,username,password);
+    - 创建SQL载体对象
+
+    - 结果集
+
+    - 遍历结果集
+
+    - 映射数据类型
+    接口：API的实现。JDBC的时候引入jar包（大量的类）
+
+5、常用的对象名词：
+    - DAO ： Data Access Object 数据访问对象。
+
+    - DTO ： Data Transfer Object  数据传输对象
+
+    - Entity ：描述数据库表的，实体类
+
+    - Mapper : 操作数据库
+6、思想：
+    - OOP ： 面向对象编程
+    - ORM ： Object Relative Mapping（非常非常的重要）
+
+        数据库         java
+        行             对象
+        多行            集合<对象类型>
+        列
+
+        从非关系型数据库中查询出来的数据如何转换为对象类型！
+
+7、JDBC的优化：(JDBC->Mybatis的重构思想)
+    - 连接数据库的信息：封装到一个文件当中
+
+    - SQL语句也放到一个文件当中，SQL语句不同的DAO对象，都创建一个文件，文件当中只存储DAO所对应的SQL语句
+
+    - 获取连接、获取载体这些内容我们能不能都封装起来
+
+    - 自动完成ORM映射
+
+    - 关于操作数据库的方法，定义到一个接口当中
+
+    - 实现类交给一个角色帮助我们创建接口的实现。
+
+8、MyBatis框架：
+    - 是一个基于ORM的持久层框架
+        框架 ： 前辈们总结出来的解决特定问题的最佳实践方案。半成品，
+        前辈们规定 连接的信息放到一个什么文件，sql语句需要放到什么文件。
+    - 有什么用：
+        对于数据进行所有的操作
+    - 怎么用？
+
+9、MyBatis框架的开发流程：
+   ① 导入mybatis的jar包 (Maven 简化)
+
+   ② 创建mybatis的全局配置文件（mybatis连接数据库的信息）   Spring Boot简化（默认配置、自动化配置）
+        xml:存储配置文件的信息（重要）
+
+   ③ 创建接口：描述操作数据库的功能（核心）
+
+   ④ SQL映射文件：   注解来简化，也要告别xml
+
+   ⑤ 告知Mybatis，你的mapper的配置文件在哪一个位置！  简化
+
+   ⑥ 测试! Spring 来简化
+
+
+10、MyBatis的SQL映射文件中resultType的作用：
+    - 将sql语句执行完毕之后得到的结果集，映射成指定的类型，列名和成员变量名字必须一致！
+
+    - 当结果集查询的列与resultType封装对象的类型成员变量不一致的情况下：
+        ① sql语句当中查询的列定义别名，别名和封装类型的成员变量保持一致
+
+        ② 数据库标准XXX_YYY_ZZZ   xxxYyyZzz  ,告诉mybatis，将标准的数据的_自动映射到驼峰命名法的成员变量
+            - mybatis的全局配置文件当中可以对MyBatis的一些默认行为进行修改。
+
+        ③ 自定义映射策略： 列名和属性名的映射关系。
+            - 当你sql语句查询出来的结果集与封装的数据类型的成员变量不一致，就得resultMap
+11、别名处理：java当中常见的数据类型，xml文件当中如果使用常见的数据类型，定义了别名
+
+    别名不区分大小写
+    java.lang.String            String
+    int                         _int
+    double                      _double
+    boolean                     _boolean
+    .....
+
+    Integer                     int
+    Double                      double
+
+    <typeAliases></typeAliases>对Mybatis结果集映射类型(全类名)起别名
+12、mybatis的关联查询：  
+
+   查询一个员工（部门信息）
+    - 1、接口-方法-> select * from 表1，表2 where  连接条件
+    - 2、分步查询
+        - 1 对 1 ：  自定义映射中，定义association标签，指定封装类型当中哪一个属性是需要另外一个sql执行才能得到。
+            <association property="属性" select="全类名.方法" column="列名">
+        - 1 对 多： 查询一个部门的所有的员工
+	<collection property="属性" select="全类名.方法" column="列名">	
+13、日志的处理：（log）
+
+    mybagtis内部：大量的打印语句。配置mybatis的日志输出
+14、参数绑定：
+    - 方法只有一个参数    #{}
+
+    - 方法有多个参数： 多个参数封装成Map集合
+        ① #{param1}   #{param2}  ................   绑定多个参数
+        ② #{arg0}   #{arg1}  ................   绑定多个参数
+        ③ 定义形参封装Map集合的key @param 在方法形参中加注解
+    - 方法的参数是一个对象：
+	key就是对象的属性#{属性}
+    mybatis讲完--->Spring
+
+
+15、增删改：返回值全部都是int
+    mybatis默认是不提交的！回滚！
+    <delete id="方法名">
+        SQL
+    </delete>
+
+16、mybatis的sql语句与方法参数的绑定方式：#{} ，${}
+		#{}			${}
+载体类型		PreparedStatement		Statement
+参数方式		?占位符替换参数		将传入的数据直接显示生成sql语句，sql拼接，不会对传入String类型的参数加引号
+安全性		防止sql注入		sql注入 and where 1 = 1
+用途		常用，一般用于给sql传值	不常用，但是可以用在sql中的非值部分，比如说列名，表名等
+
+17、延迟加载（懒加载）：分步查询
+	查询员工的时候，员工的部门也查询出来！
+	进行分部查询的时候，多条sql语句得到对应结果，如果代码当中仅仅使用了第一条sql语句的结果，则不会发送第二条sql语句给数据库
+	Mybatis默认不开启延迟加载。
+	<setting name = "lazyLoadingEnabled" value = "true"/>
+
+通过一个电影编号，查询出来电影的信息。
+
+编号、中文名字、类别、             英文名字、时长、介绍
+1   我不是药神 喜剧、剧情、短片
+
+事务：一系列对于数据库的操作，业务！伏笔！！！！
+--------------------------------------------------------------------------
+方法： 通过编号查询一个员工信息（包含部门信息）
+
+- 数据表的结构：
+emp
+id  name    salary      d_id
+2   jim     2000        101
+3   kate    1000        102
+
+dept
+d_id    d_name  d_loc
+101     财务部     大连
+102     人事部     大连
+
+- 数据表之间的关联：
+    1 - 1 : 1对1         一张表当中数据对应另外一张表当中的数据
+        - 如何维护：
+               ① 单向1对1，    单向1的一段建立一个外键引用另外一张表主键
+               ② 双向1对1 ：  单表分成多表，建立一个外键引用另外一张表的主键，而且这个外键要设置唯一性约束
+    1 - N : 1对多         一张表当中的主键如果在另外一张表当中作为外键，从主键这张表来说就1对多的关系
+         - 如何维护：
+            ① 1对N： N的一端建立一个外键，引用1的一端的主键
+            ② 1的一端建立一列，列存储多个多的一端的主键
+    双向1-1 ： 两张表，无论你从哪个表的角度来看都是1对1的关系
+    双向多对多：无论从两张表哪一个端来考虑都是1对N的关系。双向1对N,利用中间表进行维护的。
+
+
+        老师和课程
+        teacher
+        t_id    t_name
+        101     tom
+        102     jim
+        103     kate
+
+        201这个课程，101,102老师可以
+        202这个课程，101,103老师可以
+
+        teacher_course_mapping
+        uuid        t_id    c_id
+        1           101     201
+        2           101     202
+        3
+
+        course
+        c_id    c_name
+        201     西方经济学
+        202     高等数学
+
+
+
+        user表
+        uuid    nick_name   age     password    introduce   sex     hobby   balance     vip     ............
+        1       tom         12      123456      我是一个....    man     起码  100         0
+        ........................................
+        user
+        uuid    nick_name       password        vip
+        101     tom             123456          0
+
+        user_info
+        uuid    user_id     age     introduce       sex     hobby
+        1       101         12      我爱中国你        man    骑马、射箭
+        2       102         13      我恨你美国        man    骑马
+        user_balance
+        uuid    user_id     balance
+......................................................
+
+重点：数据库表之间的关联关系（1对多，1对1，双向1对1，多对多）
+Mybatis中用mybatis-config.xml配置Mybatis全局配置(包括mybatis连接数据库的信息)(还有告诉Mybatis存放SQL的xml的位置)
+Mybatis中一个xml文件对应一个mapper(DAO)，用来写sql语句，操作数据库的。
+<mapper namespace = "com.group13.dao.StudentDAO">
+	<select id="findStudent" resultType="com.group13.dao.StudentDAO">
+		select * from student where id = #{id};
+	</select>
+</mapper>
+- namespace 用来告诉你当前xml文件对应哪个DAO类
+- id对应DAO层里的方法名
+- resultType为返回值类型，若无特殊配置都要写全类名
+ 不过，Mybatis对常见类型，如基本类型和String做了类名简化处理；
+ 而且，可以在全局配置中用<typeAliases></typeAliases>对Mybatis结果集映射类型(全类名)起别名, 简化书写
+	<typeAliases>
+		<typeAlias alias="Student" type="com.group13.entity.Student" />
+		<typeAlias alias="Teacher" type="com.group13.entity.Teacher" />
+	</typeAliases>
+	or
+	<typeAliases>
+		<package name="com.group13.entity" /> // 对一整个包起别名，默认别名就是类名
+	</typeAliases>
+- 结果集映射成指定的类型resultType，列名和POJO(Entity)里的成员变量名字必须一致
+ 若不一致，
+ 	1. 可以在SQL中对查询出的列起别名，使其别名与resultType类型中的属性名一致。
+	2. 若数据库是_下划线命名法，Java是驼峰命名法，可以在全局配置 下划线列名 自动映射 Java驼峰属性名。
+		<setting name = "mapUnderscoreToCamelCase" value = "true"/>
+	3. 自定义映射：列名和JavaBean中的属性名 自由 自定义 映射关系。resultMap。
+		<resultMap id = "m" type = "com.group13.entity.Student"> // 这里面的type就相当于resultType
+			<id column = "ID" property = "sId"></id> // 映射主键用<id>标签
+			<result column = "STUDENT_NAME" property = "sName"></result> // 映射非主键用<result>标签
+			<result column = "STUDENT_AGE" property = "sAge"></result>
+		</resultMap>
+		<select id = "findStudent" resultMap = "m">
+			select * from student where id = #{id}
+		</select>
+- #{param} SQL语句中的参数赋值。
+结论：SQL语句中的参数#{}、${}并不是根据形参名绑定的，
+	而是，Mybatis会把Mapper层中的方法形参接收后封装成一个Map集合：{param1 : 参数值一, param2 : 参数值2}
+	然后，#{}和${}实际是根据这个Map集合中的key去绑定实参的。也就是根据 param1，param2绑定的。若只有一个实参，则无所谓。
+	1. #{param1}  #{param2}
+	2. #{arg0}  #{arg1}
+	3. @param注解，自定义形参封装成Map集合的key。在方法形参上用@param注解自定义key。 #{自定义key1}  #{自定义key2}
+	0. 如果操作数据库方法的参数是一个对象，那么对象的属性就是key。SQL语句中 用 #{属性名}  #{属性名} 赋值。
+	e.g.     int insertDept(Dept dept);
+		<insert id = "insertDept">
+			insert into dept(deptname, description) values(#{deptname}, #{description})
+		</insert>
+	e.g.     int insertDept(Dept dept, int a);
+		<insert id = "insertDept">
+			insert into dept(deptname, description, a) values(#{param1.deptname}, #{param1.description},#{param2})
+		</insert>
+- Mybatis关于增删改的操作：返回值都是int
+	**Mybatis默认是不提交的！(执行完一条SQL语句，如果让其永久生效则提交，如果不让其生效则回滚)**
+	**JDBC操作数据库默认是提交的**
+	<delete id = "delDept">
+		delete from dept where deptno = #{deptno}
+	</delete>
+	<insert id = "insertDept">
+		insert into dept(deptname, description) values(#{param1}, #{param2})
+	</insert>
+	**因此，Mybatis增删改操作，需要手动提交**
+	***sqlSession.commit();***
+	 

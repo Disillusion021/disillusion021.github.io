@@ -1,0 +1,368 @@
+1、java web ： web互联网中的java技术！   PHP、C#、.net、Phython
+    - servlet、jsp（重点）、spring mvc
+
+2、专业名词：
+    - web : 所有的互联网技术叫做web。
+    - 服务器（Server）: 一个可以通过网络访问的计算机（安装服务器软件）,对外提供服务的计算机。
+        - 服务器软件：tomcat（免费）、JBoss........
+        - Spring boot 工程默认导入tomcat。
+        - spring-web (spring-mvc)
+
+        - mysql ： 数据库
+    - 端口：计算机mysql服务、提供商品买卖界面的服务
+        192.168.1.112   ： 计算机   房子
+
+        端口： 进入到计算机当中的门牌号
+
+        192.168.1.112:3306
+
+        192.168.1.112:8080
+3、web资源：
+    - 服务器当中不仅仅可以放html、图片、视频、音频、txt、css、js
+    - 访问web资源：http://主机ip:端口号/资源    网址（url）
+    - 重要的一句话：已知资源的地址，访问。        97年 同创 600M   32M    windows3.2
+
+4、请求和响应模式：oop、ioc（xml、注解、配置类）、di、orm（mybatis）
+    @Component
+    A{
+        @Autowired
+        private B b;
+        public void h1(){
+
+        }
+        public void h2(){
+
+        }
+    }
+    @Component
+    B{
+
+
+    }
+
+    - 客户端通过url发送一次请求，会产生一个请求对象
+        网址、数据、客户端的信息（ip地址、操作系统、浏览器等等）
+
+    - 通过响应对象将数据传递回去。
+
+    - 当一个请求和响应结束之后，断开与服务器的连接。
+5、Spring MVC（Spring WEB） ： 客户端请求，做出响应的问题！
+
+    - MVC : java web资源划分成三个
+        - 控制器（Controller） ： 客户端可以直接通过url访问的类
+
+        - 视图（View） : html、css、Thymeleaf
+
+        - 模型（Model） : 实体类、mapper
+
+    - 控制器（处理器）：
+        - 普通的类，类当中的方法让客户端url访问。
+
+        - 类的上面加入一个注解@Controller
+            @Component
+            @Controller
+            @Repository
+            @Service
+
+        - 控制器类中写处理方法 : 处理客户端发送的请求功能
+
+6、@RequestMapping注解：定义请求映射（url）
+    - 类
+
+    - 方法
+
+7、前端发送请求数据的方式：
+    - 浏览器url。           url?请求参数名=请求参数值&请求参数名=请求参数值&.....
+    - form表单
+        <form action="/sum">
+            <input type="text" name="a"/>
+            <input type="text" name="b"/>
+            <button>求和</button>
+        </form>
+    - ajax：
+
+    - Vue的axios和http发送请求数据
+8、后端获取请求数据的方式:
+    - 方法的形参， 前端发送了若干个请求数据， 控制器方法可以设定和请求参数名字一致的形参即可接受。
+
+    - 方法的形参可以是对象。
+
+    - 请求参数名字和控制器形参不一致怎么办?
+        @RequestParam注解 可以修饰方法的形参
+        @RequestParam(value="",required=false,defaultValue="")
+
+9、@ResponseBody ： 当一个方法上面加入@ResponseBody注解，方法的返回值，springmvc解析成前端类型，返回给前端
+错误编码：
+    404 ： url错了
+    500 :  程序内部出现了异常
+    400 ： 请求数据和接收数据的类型不一致
+10、@RequestBody : 伏笔
+
+11、Ajax：允许页面在没有刷新的情况下，就可以让客户端与服务器进行交互。（Google） 谷歌地图
+    JavaScript和Jquery都提供了ajax支持：
+
+    $.ajax({
+        url : '地址',
+        data : 'key=value&key=value',
+        success : function (data){
+
+        }
+    })
+12、前端数据类型和服务器端数据类型的匹配：
+    - 前端发送数据全部是字符串
+    - String ---> 常见的数据类型   自动进行转换
+    - 自定义类型转换器（自己去查找！！）
+
+    spring boot会有默认配置：
+        常见的类型转换器添加到默认配置。
+
+    全面接管Spring MVC的配置：拓展
+    配置类继承WebMvcConfigure
+13、Spring MVC配置的拓展：spring boot工程当中
+    配置类：自定义类型@Configuration
+
+    - 继承 WebMvcConfigureSupport ，禁止所有mvc的默认配置,不建议使用
+
+    - 继承 WebMvcConfigurerAdapter , 保留mvc的默认配置，拓展
+
+    - 实现 WebMvcConfigurer（使用特别多）
+
+    前端是一个人的名字，人的出生日期
+    控制器当中通过Person对象来接收！
+14、REST风格的URL：(特别特别特别的重要)
+    REST ： 统一资源转换。 所有服务器当中的web资源（控制器），以一个统一风格进行url的定义！
+
+    html规范当中发送请求可以有两种方式：
+    get             post
+
+    - 默认无论是通过form表单还是url或者是我们以后学习的其他发送请求的方式，全部默认都是get请求。
+    - <form method="post">
+                get                                 post
+请求数据         url?key=value&key=value              封装到请求内部
+安全性           不安全                                安全
+数据长度         受限于url                              无限制
+字符编码         IOS8859-1                             特殊编码
+
+
+    Spring MVC对于请求方式：
+    get             查询操作
+    post            新建操作
+    delete          删除操作
+    put             修改操作
+    ....
+
+    到目前为止：我们只能get和post。
+    get：默认都是get请求，url还是form
+    post：form表单
+
+    $.ajax({
+        url : '',
+        type : ''
+    });
+
+    前端如果想发送delete或者put请求，前端必须要发送post请求，携带一个_method请求参数，delete或者put
+
+    @GetMapping
+    @PostMapping
+    @DeleteMapping
+    @PutMapping
+    总结：rest风格的api的具体应用：
+    1、控制器当中方法CRUD
+
+    2、不能涉及页面跳转(JSP被淘汰)
+
+    3、url的定义
+
+    get :   http://localhost:8080/emp/2/xjc/33
+    delete: http://localhost:8080/emp/2
+    post :  http://localhost:8080/emp
+    put :   http://localhost:8080/emp/3
+
+    @RestController
+    @RequestMapping("/emp");
+    public class EmpController{
+        @GetMapping("/{uuid}");
+        public Emp findEmp(@PathVarable("uuid") int uuid){
+
+        }
+        @GetMapping("/0")
+        public List<Emp> all(){
+
+        }
+
+
+        @DeleteMapping("/")
+        public boolean deleteEmp(int uuid){
+
+        }
+    }
+
+    4、前端发送请求参数：占位符参数
+        url/值
+、前端有一个日期框----> spring mvc的控制器接受这个日期  Date
+
+15、会话对象：
+    - 请求和响应模式： 客户端发送请求，服务接收到请求，服务做出响应之后。
+        客户端就会断开与服务器的连接，HTTP协议的无状态性。
+    - 服务器会对每一个客户端的访问：产生一个属于这个客户端的session对象。在一个客户端发送了多个请求给服务器时候，这多个请求是在同一个会话对象当中。
+
+        - 控制器方法： HttpSession
+        - 可以在一个类的上面加入@SessionAttributes() 可以从模型数据当中获取数据放置到session会话当中
+16、拦截器：Interceptor。 解耦，降低耦合，代码分散
+
+    - 拦截器类：
+        public class MyInterceptor implement HandlerInterceptor{
+            访问之前拦截
+            public boolean preHandle(request,response,object){
+
+            }
+            访问之后拦截
+            postHandle()
+            结束之后拦截
+            afterCompletion()
+        }
+
+        @Configuration
+        public class Group13SpringMVCConfig implements WebMvcConfigurer {
+            @Override
+            public void addInterceptors(InterceptorRegistry registry) {
+                registry.addInterceptor(new MyInterceptor()).addPathPatterns("/**");
+            }
+        }
+
+
+-------------------------------------------------------------------------------------------
+当当网：
+后台：Spring + Spring MVC + MyBatis + Spring Boot  SSM框架：
+DB : MySQL
+前端：html + css + JQuery + Ajax
+
+前端页面展示：JSP
+
+
+--------------------------------------------------------------------------------
+1、JSP: 服务器端页面动态展示数据技术，模板引擎（template engine）
+    - 模板引擎：html基础上通过特定的语法规则动态的展示数据。
+        - ThymeLeaf、FreeMarker
+
+    - 是一个基于java的页面，Java Server Page
+
+    - html + java代码就是JSP,动态数据的展示
+
+2、Spring Boot默认不支持jsp ：
+    - 导入JSP的依赖
+                <!-- 添加servlet依赖模块 -->
+                <dependency>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>javax.servlet-api</artifactId>
+                </dependency>
+
+                <!--添加tomcat依赖模块.-->
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </dependency>
+                <!-- 使用jsp引擎，springboot内置tomcat没有此依赖 -->
+                <dependency>
+                    <groupId>org.apache.tomcat.embed</groupId>
+                    <artifactId>tomcat-embed-jasper</artifactId>
+                </dependency>
+    - 配置
+        application.yml
+        spring:
+            mvc:
+                prefix: /
+                suffix: .jsp
+    - 创建一个资源文件夹（JSP）
+        webapp文件夹src内部与java、resources并列
+    - IDEA进行JSP创建的支持：选择file --> project struct --> moduls --> 打开我们项目 ---> web ---> 添加资源目录指定webapp即可
+
+3、Spring MVC：
+    - 视图解析器：
+        自动获取控制器的返回值，配合着配置文件当中配置号的视图前缀和视图后缀进行解析，
+        解析定位到一个真正的视图文件的当中，进行跳转。
+        controller返回的值必须是字符串（逻辑视图名称）        /逻辑视图.jsp
+
+        结论：方法上面
+            - @ResponseBody ： 不进行页面跳转，直接返回数据
+            - 没加@ResponseBody ： 返回值必须是String，根据配置跳转到一个物理视图。
+4、JSP页面的语法规则：
+    - 静态代码（html、css、js、jquery）
+
+    - 动态元素：
+        - 指令元素： 描述jsp的全局信息（需要的包、编码.....）
+            <%@ page 属性="" 属性="" %>
+            <%@ include %>
+            <%@ taglib %>
+        - 脚本元素：
+            <% %> : java代码
+            <%= %> : 表示式值   out.println();
+            <%! %> : 设置当前JSP的成员变量
+5、JSP的九大内置对象：
+    jsp的代码段当中可以直接使用的对象
+    out
+    request
+    response
+    page
+    ..........
+
+6、web资源之间关系：
+    - 请求转发：客户端发送请求给A资源，A资源处理完毕之后，请求给B资源，B资源做出响应的。
+              客户端发送请求给/emps资源，/emps从service当中取到list，请求给index.jsp,jsp页面做出响应。
+                              80元               80 + 20
+              张三 -------->  李四    ---------> 王五
+                    查询员工         得到了List集合
+              客户端------------>   /emps          --------------->    index.jsp
+
+              张三 -------->  王五
+    - 重定向： 客户端发送请求给A资源，A资源处理完毕之后，客户端找B资源，B资源做出响应。
+                     借钱
+              张三  -------> 李四
+              张三  -------> 王五
+
+                    查询员工         得到了List集合
+              客户端------------>   /emps
+                   <-----------
+                      找index.jsp
+
+              客户端------------->  index.jsp
+
+    - 区别：
+        1、发生请求转发的相邻的web资源，共享同一个请求；而重定向的相邻的web资源之间，两次请求。
+        2、请求转发url不变；而重定向发生变化。
+
+    - 用途（重点）：一个请求对象当中可以存储值，共享同一个请求对象的资源，都可以访问这个存储的值。
+
+7、处理模型数据：
+    - 最原始：SpringMVC允许在方法的形参加入一个请求对象参数，自动把请求对象，参数传递过去。
+            形参： HttpServletRequest request          request.setAttribute(String,Object)
+
+    - Spring MVC屏蔽了原生的请求对象，将数据放置到请求当中，处理模型数据的集中方式：
+        ① 形参位置：Map<String,Object> ,向map集合当中扔数据，map集合的数据同步到请求对象当中。
+        ② 形参位置：Model或者ModelMap
+        ③ 方法的返回值：ModelAndView
+8、EL表达式： 获取请求对象数据内容  ${请求对象当中key值}
+
+    <%= u.getName() %>
+
+9、JSTL : Jsp Standard Tag Library
+    标签 <h1></h1> <table></table> <ul></ul>
+
+    JSTL内部提供了大量的标签，标签是用来代替java代码。
+
+    JSP当中取使用JSTL：
+        - 导入依赖
+
+---------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+

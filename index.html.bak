@@ -15,7 +15,7 @@
       name: '',
       repo: '',
 	  coverpage: true,
-	  loadlivebar: true
+	  loadNavbar: true
     }
   </script>
   <!-- Docsify v4 -->

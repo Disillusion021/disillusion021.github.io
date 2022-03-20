@@ -1,0 +1,113 @@
+1、延迟加载（懒加载）：分步查询，1对1或者1对多
+    - 多表查询
+
+    - 分步查询：OOP思想，类当中加入另外一个类的对象属性，类当中加入一个集合属性
+        - 查询一个员工（列）
+
+        - 查询部门
+    - 视图 ：数据库当中多张表数据暂时存到临时的表
+
+    案例：电影（1 对 1） 查询一个电影基础信息，详细信息。
+        电影编号    电影名字    电影时长    介绍  ....
+        电影编号    电影名字 : film_t
+        电影时长    介绍     : film_info_t
+
+        select * from 视图
+
+2、注解：
+    @Select("select * from student where id=#{param1}")
+    @Insert
+    @Update
+    @Delete
+    @ResultMap  ： 自定义映射
+
+    XML：复杂的sql语句
+
+    注解：简单的sql语句
+3、动态SQL：sql语句当中加入特定动态sql标签，决定sql语句片段是否需要加入到整条sql语句当中
+
+     <if test="条件">
+        sql片段
+     </if>
+
+     <where> 可以判断是否包裹指定的sql片段，如果没有sql片段where关键字不会加入
+
+     </where>
+
+     <choose>
+        <when test="">
+
+        </when>
+        <when test="">
+
+        </when>
+        <otherwise>
+
+        </otherwise>s
+     </choose>
+
+
+     当你的参数是一个集合的时候
+     <foreach>
+
+     </foreach>
+
+
+
+     sql片段字符串处理
+     <trim>
+
+     </trim>
+     方法：
+        - 通过名字做模糊查询
+        - 通过学校进行等值查询
+        - 名字和学校同时进行查询
+
+     List<Student> findStudent(Student student)
+     List<Student> findStudent(String name,String school);
+4、缓存：临时存储数据的一段内存空间。
+    - 硬盘和内存：
+
+        1byte           1个英文字母
+        1024byte        1kb
+        1024kb          1M
+        1024M           1G
+        1024G           1T
+
+        30T :
+
+    - 内存：也是用来存储数据，临时数据。32G  64G     30T（缓存的一种）
+
+    第一次打开应用系统（加载开启当前应用程序的所有数据！） 暂时存储内存当中
+
+   mybatis的缓存处理（积累） ： redis、mongoDB、kafka
+        - 一级缓存： sqlSession级别的缓存，sqlSession获取到的数据，
+          创建属于sqlSession对应的内存空间，默认一级缓存自动开启！
+          使用通过sqlSession获取到的mapper的时候，首先会到一级缓存寻找是否存在你要查找的数据，如果没有，数据库
+
+        - 二级缓存： mapper级别的缓存。针对于每一个mapper都会创建一个缓存，
+        二级缓存的数据，当你关闭一级缓存，一级缓存同步到二级缓存当中！
+
+            mapper对应的sql映射文件当中
+            <cache></cache>
+
+C
+
+hello()
+
+张三
+A implements C
+
+hello()
+
+李四
+B
+
+C a = new A();
+b(){
+
+    a.hello();
+}
+
+
+

@@ -1,0 +1,387 @@
+第一章 初识javascript
+0、Json字符串和Json对象的互相转化
+	Json对象 => Json字符串	JSON.stringify();
+	Json字符串 => Json对象	JSON.parse();
+1、JavaScript：基于对象一种编程语言，轻量级、解释型。
+
+2、JavaScript的作用： 
+	- 可以完成网页特效（片面的理解）
+	
+	- 操作页面当中的元素（对象） 属性和方法  .属性或者.方法()
+
+3、开发流程：
+	- html + css
+	- 用户触发的某一个元素的事件（用户对哪一个元素做了什么样的动作）
+	- 特效是修改了什么样式才产生的
+	- 编写JS代码
+4、第一个网页特效：
+	- 事件：用户做的动作，如果用户对于某一个元素做一个动作。
+		- 事件以属性的方式放置元素内部
+		- 事件都是以on开头
+	- 总结：
+		① JavaScript 事件内部
+		② onmouseover、onmouseout、onclick、ondblclick事件，事件作为html元素的属性存在
+		③ JS代码当中，可以直接通过id来获取当前元素对象 .属性
+			- html当中属性是什么，JS对象.属性
+			
+			- 伏笔 ： 有一些属性不能直接  对象.属性！！！ 比如class属性值，就得用className来获取。
+			
+5、函数（方法） ： 把一些功能的实现封装起来。
+	function 函数名(参数列表){
+		
+	}
+	
+	修饰符 返回值类型 方法名(参数列表){
+		
+	}
+	
+	- 方法的参数：形式参数
+	
+6、JavaScript的兼容性问题： 并不是所有浏览器都识别JavaScript。   chrome和火狐
+
+			一段JS代码   IE6		IE8		IE10		猎豹		360		QQ		......  
+			
+			
+	- 通过id获取元素对象：对于低版本的浏览器是不识别的！
+	
+	- JavaScript当中的一个对象： document 当前整个页面文档   
+	
+		document.属性
+		document.函数()
+		
+		document.getElementById(id值) : 对象
+
+7、网页换肤：
+	- html : html的结构、样式、行为三者分离吗，如何抽离样式！
+		<link href="" rel="stylesheet" type=""/>
+	
+	- 任何标签的任何属性，都可以修改 
+	
+	- HTML里怎么写，JS里就怎么写 
+
+第二章 初探JavaScript魅力 - 2
+1、函数传参：参数就是占位符，函数里定不下来的东西就可以当做函数参数使用。
+
+2、JS访问属性的几种方式：
+	① 对象.属性名
+	② 对象['属性名']或者对象[变量] : 当操作的属性不固定，属性名是通过要给变量来存储
+		若直接 对象.变量 js会寻找这个对象里属性名叫变量名的属性。
+		写成    对象[变量] 中括号[]会解析表达式值，js会寻找这个对象里属性名为变量值的属性。
+	③ 对象提供的dom方法：
+			- getAttribute(属性)
+			- setAttribute(属性,值)
+			- removeAttribute(属性)
+	
+3、如何访问属性：
+	- 属性是什么，对象.属性
+	- 属性是标准-分离不同单词，访问，-对应驼峰命名法
+		比如 background-color 在js中访问时必须用驼峰命名法访问。e.g. odiv.style.backgroundColor = 'red';
+	- class : 是js的关键字   .className
+	
+4、提取行间事件：（对于架构师来说比较重要）（就是把行间事件放js里直接用匿名函数写）
+	（也叫做事件处理函数）
+	- html的规范：
+		结构、样式、行为
+	
+	- window: 浏览器窗体对象		
+	
+		document、console、window
+		window.onload = function {
+			js代码
+		}
+		
+	- 函数： alert(字符串)	confirm(字符串)
+	
+5、获取元素对象的几种方式：
+
+	document文档对象当中getElement之类获取元素的方法。所有html元素对象都具备。
+	
+	- document.getElementById('id值')
+	
+	- document.getElementsByTagName(tag名字)
+	
+	- document.getElementsByClassName(class名);
+	
+	- document.getElementsByName(name名)
+	
+6、js的关键字：
+	var a = 1;  没有作用域的概念
+	
+	let a = 1;  有作用域的概念
+	
+	const a = 1; 常量
+	
+7、js当中如何访问元素内部文本： innerHTML
+	<div style="">
+		..................
+	</div>
+	
+	<span>
+	
+	</span>
+	
+第三章 javaScript基础 
+
+
+1、组成部分：
+	- ECMAScript ： ES 核心解释器 将JS代码解析成计算机可以读懂的语言  浏览器自带
+		- ES5的语法规则。ES6   let 箭头函数......   boss直聘搜一搜1w-2w工资
+		- var
+		- for
+		- if 
+	- DOM：Document Object Model(文档对象模型)。 页面当中所有的元素当成一个对象来处理。 DOM树（页面当中所有标签）
+		- orm
+		- oop
+		- ioc
+		- aop：没学
+	- BOM：Browser Object Model。 浏览器对象模型,浏览器当中封装对象了。
+		- window
+		- console
+		
+2、js的数据类型： 定义变量的时候无需指定数据类型 但js还是有数据类型的概念
+	- string、number、object、function、boolean、undefined、array（array在js中指的是数组，js当中的数组就是arraylist集合）.....   Vue.js和Angular.js
+	
+	- typeof :    typeof 变量或者常量 (非重点) （用来查看当前变量或常量的数据类型）
+	
+3、页面当中用户输入的内容全部都是字符串（重要）：
+	- 类型转换
+		parseInt(字符串) ： 整数
+		parseFloat(字符串) ： 小数
+	
+		String s = "你好，中国";
+		int a = (int)s;
+	
+		强制数据类型转化： 数据之间存在共性的特征。
+		double a = 1.2;
+		int b = (int)a;
+		
+		boolean a = true;
+		int b = (int)a;
+		
+		int a = 12;
+		char b = (char)a;
+		
+		Animal a = new Dog();
+		
+		Dog b = (Dog)a;
+		
+4、变量的作用域和闭包：
+	- 作用域：变量的有效范围。意义不大。
+	
+	- 闭包:子函数可以访问父函数当中的变量
+		项目当中唯一的用途：
+		this代表事件源
+		_this比较重要！！可以定义一个闭包中的局部变量给子函数使用
+	window.onload = function {
+		var _this = window;
+		btn.onclick = funciton() {
+			_this.id = "xxx";
+		}
+	}
+
+		
+5、==和===：
+	==  : 比较值，自动类型转换
+	=== : 值和类型都得一致，不自动类型转换
+	
+	!= ：  比较值，不比较类型
+	!==： 既比较值也比较类型
+	
+6、流程控制：
+	switch(变量){
+		case 值:
+			......;
+			break;
+		case 值:
+			.......;
+			break;
+		default:
+			.....;
+	}
+7、什么是真什么是假？
+		java：true、false
+		
+		前端：
+			真：true、非0、非空字符串、非空对象
+			假：false、0、''、null 、undefined
+8、Json：（Jackson） 非常非常非常非常的重要。前端和后台进行交流的一种数据格式！
+		var a = {
+			name : '张三',
+			age : 12,
+			height : 1.74,
+			eat : function () {
+				吃汉堡包
+			}
+		};
+		Json是一种描述java对象的数据类型。 Json就是map集合，就是Java中的对象，key表示属性名或方法名()，value表示值。
+		如何访问Json对象中的属性？
+		和Java一样，通过 对象.属性名 或 对象.方法名 访问 (没有get方法，全部都是公有的public)
+		如：a.name  a.eat()
+		public class Student{
+			private String name;
+			private int age;
+			public void eat(){
+				
+			}
+		}
+		
+		万物皆为对象（万物皆为数组）
+		
+		Student s = new Student();
+		
+		java当中的对象：就是用来存储数据的
+	如何遍历Json？用foreach循环遍历json对象，默认遍历的是json中的key值
+	for(var k in a) {
+		console.log(a[k]);
+	}
+		
+第四章 深入JavaScript
+1、函数返回值： 定义函数的时候无需指定返回值数据类型，但是可以用return返回值。
+		
+2、可变长参数：arguments	arguments是一个数组
+	// 当方法中没设置参数时，默认为arguments可变长参数
+	function sum（）{
+		var s = 0;
+		for(let i = 0; i < arguments.length; i++) {
+			s += arguments[i];
+		}
+		return s;
+	}
+	
+3、数组： 存储多个元素，每一个元素都是有下标的
+	前端的数组，和后端的集合（ArrayList）是一回事(重要) 
+	
+	声明：
+		var a = [3,4,5,67];
+	访问：
+		数组[下标]
+	操作数组方法：
+		- 添加方法：
+			数组.push(值) 			尾部追加
+			数组.unshift(值)			头部追加
+		- 数组元素的删除：
+			数组.pop()				从尾部删除一个元素（弹出元素）
+			数组.shift()				从头部删除一个元素
+		- sort函数：自学（并不是特别的重要）
+		
+		- concat(数组): 会将两个数组连成一个数组形成一个新的数组
+			数组1.concat(数组2) : 有返回值
+		
+		- join(字符串) : 加入、连接
+			数组.join(字符串) 返回值为字符串
+		- split(字符串)
+		
+		- splice(参数列表) ： 重载函数、删除插入的
+			splice(下标,长度,元素...)
+			
+			splice(下标,长度) ： 删除
+			
+第五章 定时器 : 定义一个时间窗（周期），反复执行一段代码
+	- 间隔性定时器 ： 每隔时间窗周期就会执行一遍代码
+		setInterval(函数,时间窗（毫秒为单位）) 返回的是一个 定时器对象;
+	- 延迟型定时器 ： 在一个时间窗周期后，会执行一遍代码 （执行一次）
+		setTimeout(函数,时间窗（毫秒为单位）);
+
+	定时器的应用：
+		速度是一个缓冲运动。
+第六章 DOM基础
+	- DOM :  document object model。页面当中所有标签元素都可以封装成一个dom对象
+	
+	- DOM基础： 元素对象叫做节点。 节点对象
+	
+	- 节点： 标签
+		- 父节点
+		- 子节点
+	- 通过父节点获取子节点：
+		- dom节点对象里面提供了两个通用的属性
+		所有节点对象(标签)中都存在childNodes和children属性用来获取子节点(子标签)
+		
+			① childNodes : 父节点.childNodes  用处不多(因为会把回车空格换行纯文本都当做子节点，所以一般不用)
+				- 不包含间接子节点
+				- 文本节点  （js当中把一段纯文本也当做一个子节点，包括纯空格都算节点，回车换行也算）
+			② children ： （比较重要）(这个不包含文本节点，也不包含间接子节点)
+				- 不包含文本节点
+			// 找ul1节点对象中所有的子节点(不含回车换行空格)
+			var children = document.getElementById('ul1').children;
+	- 子节点获取父节点: parentNode  Vue
+			// 找li1节点对象中的父节点
+			var parentNode = document.getElementById('li1').parentNode;
+	- 父节点获取首尾子节点：
+		- firstChild（兼容性较低）、firstElementChild（高）
+		- lastChild、lastElementChild
+	
+	- 获取兄弟节点：
+		- nextSibling、nextElementSibling
+		- previousSibling、previousElementSibling
+	- 操作元素属性的几种方式：  
+	
+		① 对象.属性
+		② 对象['属性']
+		③ 对象提供的dom方法：
+			- getAttribute(属性)
+			- setAttribute(属性,值)
+			- removeAttribute(属性)
+
+第七章 DOM操作的应用
+	- document.createElement('标签名') ： 返回值就是一个对象
+	- 追加到某一个父节点当中：
+		父节点.appendChild(子节点);
+		
+	- 事件对象： 具体存在的单一个体   点击了按钮（点击的动作）     车祸（事件、地点、任务）这些抽象的事物都算作对象
+		事件对象当中会包含与当前触发的事件相关的所有信息。比如车祸对象里的时间，地点，人物都是车祸对象的属性。
+		
+	系统事件对象：event		div1.onkeyup = function () {
+					if (event.key = "ArrowUp") {
+						console.log("向上");
+					}
+				}
+	- 删除dom节点： 父节点.removeChild(子节点)
+	
+	- insertBefore : 父节点.insertBefore();	在已有元素前插入
+
+	-文档碎片(缓存): document.creatDocumentFragment();能在一定程度上提高操作文档的性能
+
+
+面向对象的终极目标：解耦（降低耦合度）、提高代码的复用性！ 10个桌子，一个服务员、初始、清洁员、收银员
+
+页面当中所有的元素都可以封装成dom对象。
+
+抽象总结：
+JavaScript：可以控制元素，将元素标签封装成dom对象，进而通过dom对象的属性和函数，操作当前元素对象。
+
+var a = document.getElementById('img');
+a.src
+
+
+--------------------------------------------------------------------------------
+
+JQuery : 基于JS框架、工具
+
+JQuery不允许通过.来调用对象属性
+
+1、Jquery是什么？Jquery是基于JS的一个函数库。 
+
+2、Jquery用途：
+	- 可以控制元素，将元素标签封装成JQuery对象
+	- Jquery对象是不允许像DOM对象一样访问元素的属性的。提供了函数来访问
+	
+3、Jquery使用：
+	- 导入js文件
+	js:	window.onload = function() {
+		}
+	JQ:	$(function());
+
+	js:	var b = document.getElementById('#btn');
+	JQ:	$('#btn');	//获取Id为btn的元素对象
+框架：前辈们对于特定问题的一种最优的解决方案。最佳实践。
+
+MyBatis：
+
+MyBatis Plus：sql语句、方法；
+
+1、获取dom元素
+2、操作样式
+3、动画效果
+4、基础语法也比较麻烦
+5、......................
+

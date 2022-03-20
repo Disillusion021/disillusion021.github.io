@@ -1,0 +1,83 @@
+a: append 
+i: insert 
+o: open a line below
+A: append after line
+I: insert before line
+O: append a line above
+bi:词首插入
+ea:词尾插入
+
+
+:w save
+:q quit
+:wq save and quit
+:set nu 设置行号
+:vs 竖分屏
+:sp 橫分屏
+:q 退出分屏
+% 代表全部文件
+s 代表替换命令
+g 代表全局替换 
+例:
+:% s/java/python/g
+v: 进入visual可视模式
+V: 进入visual可视模式并按行选择
+Ctrl+v: 文本方块选择
+y: 复制
+p: 粘贴
+d: 删除
+gi: 快速跳转到最后一次编辑的地方进入插入模式
+
+插入模式下快捷键：
+Ctrl+h 删除上个字符
+Ctrl+w 删除上个单词
+Ctrl+u 删除当前行
+
+w/W: 下一个word/WORD开头
+e/E: 下一个word/WORD结尾 
+ge: 移动到前一个的单词的词尾
+b/B: 回到上一个word/WORD开头
+word/WORD: 单词/单词串
+:syntax on 语法高亮,off为关闭
+
+行间搜索移动
+f+char: 移动到char字符上,F为向前搜索(find)
+t+char: 移动到char的前一个字符,T为向前搜索(until)
+如果一行有多个，使用;/,继续搜索该行下一个/上一个
+0移动到行首，$移动到行尾
+^移动到行首非空白字符，g_移动到行尾非空白字符0w也是一样
+
+页面移动
+gg/G移动到文件开头/结尾,Ctrl+o快速返回上一个位置
+:行号 or 行号+G 跳到指定行
+H/M/L跳转到屏幕的开头(Head)/(Middle)/(Lower)
+Ctrl+u/Ctrl+f上下翻页(upward/forward)
+zz把屏幕置为中间
+mm记住一个位置，`m随时跳转到该位置
+`.返回上次修改位置
+/查找 n下一个位置，gn查找下一个位置并选中
+
+x 删除一个字符
+xp 交换两个字符位置
+daw 删除整个单词，包含后面的空格(delete around word)
+diw 删除整个单词，不包含空格(delete inner word)
+caw,ciw,ci + char, ca + char都可以，a代表around，i代表inner
+viw,vaw 
+dd 删除一行
+dw/de/dh/dj/dk/dl/db/d^/d$/d0
+d还可以和f+char或t+char连用
+例如，df；或dt）
+R 进入覆盖模式
+ge 回退到上一个单词的末尾
+= 自动缩进范围内的文本
+< >都是控制缩进的
+选择模式中按o键可以在两端切换
+可以自定义翻页用leader+快捷键定义
+自定义leader寄存器的操作
+自定义分屏leader快捷键
+在一个数字上使用Ctrl+a和Ctrl+x对数字加一减一
+:tabo 关闭其他标签
+gt 到下一个tab
+gT 到上一个tab
+1gt 跳到第一个tab
+5gt 跳到第五个tab

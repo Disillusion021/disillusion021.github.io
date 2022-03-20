@@ -1,0 +1,67 @@
+1. 什么是JDBC？
+	JDBC全称为Java Data Base Connectivity(Java连接数据库技术)，这是一个通过Java代码编写的用于Java连接数据库的技术！
+	要求：工作中JDBC的代码没用！不学代码，只学思想！
+
+2. 如何搭建JDBC开发环境？
+	(1). 在项目中新建一个目录，名为lib，准备容纳JAR包
+	(2). 右键JAR包选择add as library解析JAR包！
+	(3). 建包建类编写JDBC相关代码完成Java连接数据库的操作！
+
+3. 什么是JAR包？
+	JAR包本质上就是一个Java工程打包后的产物，JAR包存储着该工程中所有的源码信息！只要导入JAR包至当前项目中，当前项目即可访问JAR包中提供的源码！
+
+4. 使用JDBC连接数据库的步骤有哪些？(☆☆☆☆)
+	(1). 加载驱动（构建JDBC相关底层所需的对象！）
+		Class.forName(DRIVER);
+	
+	(2). 建立连接对象
+		Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+
+	(3). 准备SQL语句(编写SQL语句：动态的数据使用问号占位)
+		String sql = "....";
+
+	(4). 装载SQL语句(载体)
+		PrepareStamtent ps = conn.prepareStatement(sql);
+
+	(4.2). 装载之后给SQL中的问号赋值！
+		ps.setString(1, name);
+            	第一个参数：表示给第几个问号赋值！
+            	第二个参数：表示给问号赋值的数据！
+
+	(5). 执行SQL语句
+		executeUpdate()：专门用于执行增删改语句！(返回值是整数结果！)
+        		executeQuery()：专门用于执行查询语句！(返回值是一种特殊的集合结果！)
+
+	(6). 释放资源！
+
+5. 什么是SQL注入攻击？(☆☆☆☆)
+	当用户输入的数据直接通过拼接的形式组成SQL语句时，由于用户输入的违规字符导致改变SQL原义的行为称为SQL注入攻击！
+	如何解决SQL注入攻击？
+		使用问号当做占位符完成SQL语句的编写！
+
+// IO流四步曲：获取地址，建立通道，传输信息，回收资源
+// JDBC：加载驱动建立通道，写sql语句装载到statement载体里并对sql语句中的参数赋值,接受sql语句的返回值（int or Result Set）,遍历结果集(rs.next()),ORM映射结果集为我们想要的数据类型。
+
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

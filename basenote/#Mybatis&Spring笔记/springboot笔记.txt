@@ -1,0 +1,190 @@
+1、Spring Boot ：整合第三方框架，自动配置（告别xml）
+
+2、使用mybatis框架：
+	① 导入jar（Maven  pom.xml文件）
+	② 全局配置文件：mybatis-config.xml ，描述mybatis核心设置   application.yml    application.properties
+	③ 接口 :
+	④ sql映射文件 : 注解 @Select      MyBatis-Plus
+	⑤ 测试-主方法 ： Spring Boot Junit     @Test
+
+	mybatis当中用到的对象：
+	接口实现类对象、SqlSessionFactory、SqlSession................
+
+	- bean的配置方式：
+		- xml	
+		- 注解
+		- 配置类
+	
+3、Maven：开发工具，构建一个项目
+	
+	- src
+		- main
+			- java			源代码（接口、类）
+			- resources		资源（页面、配置文件、图片、视频、音频）
+
+		- test
+			- java			测试源代码
+	
+	- pom.xml	当前项目相关的信息， 名、开发公司、版本   project object model
+		groupId ： 项目组的名字	域名倒写的方法		com.baidu.porker
+		artifactId ： 项目的名字	fight
+		version： 版本		2.1		
+
+        gav ： 一个maven工程的坐标！！ 知道一个maven工程的坐标。 mybatis框架（Maven工程）
+        <dependecy>
+            <groupId></groupId>
+            <artifactId></artifactId>
+            <version><version>
+        </dependecy>
+4、maven具体的作用：
+	- 编译：
+	- 部署（上线）：
+	- 安装： 工程分享给其他开发人员
+	.........................................................
+	mybatis： maven工程		导入jar包的时候，只要知道框架的gav，你就可以通过网络，将jar自动导入！
+
+5、maven安装：
+	- 将maven的文件夹放置到指定盘符
+
+	- 配置环境变量：
+		① 找到你maven的安装路径
+		② 鼠标右键打开我的电脑-----> 属性----> 高级系统配置-----> 环境变量----> 系统变量（选择新建）
+			变量名 ： MAVEN_HOME
+			变量值：  maven的安装路径
+
+		③ 鼠标右键打开我的电脑-----> 属性----> 高级系统配置-----> 环境变量----> 系统变量（path的环境变量）
+		    			---> 新建  --> %MAVEN_HOME%\bin
+
+	注意事项：maven是使用java开发出来的构建工具。
+		鼠标右键打开我的电脑-----> 属性----> 高级系统配置-----> 环境变量----> 系统变量（选择新建）
+			变量名：JAVA_HOME
+			变量值：自己的目录\java\jdk1.8.0_101
+		鼠标右键打开我的电脑-----> 属性----> 高级系统配置-----> 环境变量----> 系统变量（path的环境变量）
+		    			---> 新建  --> %JAVA_HOME%\bin
+
+	打开命令行窗口：mvn -version，出现了maven的版本
+			
+6、仓库：
+	- 中央仓库： 存储框架（所有开源框架） 美国。   阿里巴巴做中央仓库的镜像。
+		
+		
+	- 本地仓库：计算机系统当中，创建一个文件夹存储从中央仓库下载下来的jar包。
+
+
+
+	maven 配置要进行修改
+		- 中央仓库：不需要大家来做！
+		- 指定本地仓库：
+			 <localRepository>f:/maven/repository</localRepository>
+
+		打开maven的安装文件夹：
+	
+7、idea的配置：
+	关闭所有idea窗口，重新打开idea，开启新的欢迎页面，选择configure----> settings ---> maven
+		maven_home_directory   改成你自己maven的目录
+		user_settings                    改成你自己maven的目录conf里面settings.xml
+
+		选择ok
+		
+
+8、依赖 ： 使用mybatis框架，导入jar包。 当前项目依赖于mybatis存储
+
+	导入jar包
+	导入依赖
+
+
+9、lombok：框架，帮助我们自动生成类set和get方法、toString、equals、构造器、hashcode
+
+
+
+	@Data
+	@AllArgsConstructor
+	@NoArgsConstructor
+	@EqualsAndHashCode
+
+10、Spring Boot ： 简化开发（自动化配置）
+    - 导入依赖
+
+    - 配置：
+        全局配置文件（.xml） 连接的数据源的信息、驼峰命名法、日志、延迟加载、缓存、sql映射文件（mappers）
+
+        非常重要的内容： Spring Boot默认创建一个Spring容器
+
+        - application.properties
+            key=value
+            key=value
+        - application.yml
+            key:
+                key:
+                   key: 值
+        DruidDataSource : 阿里的数据源
+
+        mybatis的配置文件：springboot要求所有的配置文件（yml、properties、xml）都要resources路径
+            - 开发环境：mapper和xml都是在同级目录当中
+
+            - 和springboot要求冲突。修改spring boot的资源路径
+
+
+11、事务：处理一个业务的流程。
+    ACID：
+    原子性：事务方法内部的代码是一个整体！
+    一致性：事务方法在执行的过程当中必须满足业务数据一致性。
+    持久性：事务方法执行完毕，没有出现任何异常，永久改变数据库！
+    隔离性：当一个事务执行的过程当中，另外一个事务不能加入进来！
+
+    rollback：回滚
+    commit：提交
+    方法（）{
+
+        1、打车
+        2、进入火车站
+        3、扫码
+        4、排队
+        5、买票
+
+    }
+
+12、@Transactional事务属性：
+        - propagation : 事务的传播行为。被调用方法的事务当中加入传播行为属性
+            当一个事务方式调用了另外一个事务方法，两个事务是在一个大的事务里面，还是分别是独立事务！
+            @Transactional
+            吃饭(){
+                1、点餐
+                2、上菜
+                3、吃
+                4、结账
+            }
+
+            @Transaction
+            聚餐(){
+                张三.吃饭()
+                李四.吃饭()
+                王五.吃饭()
+            }
+
+            聚餐()
+
+            聚餐事务    张三.吃饭()     李四.吃饭()     王五.吃饭()
+            ---------------------------------------------------->
+
+            聚餐事务
+            ---------------------------------------------------->
+
+            张三.吃饭()
+            -------->
+
+            李四.吃饭()
+            -------->
+
+            王五.吃饭()
+            -------->
+
+
+        超时：   薯片        面包      可乐      华子
+
+
+
+
+
+
+
