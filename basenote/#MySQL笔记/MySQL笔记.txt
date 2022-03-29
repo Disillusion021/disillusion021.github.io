@@ -172,6 +172,17 @@
 	唯一性太差的字段不适合单独创建索引(如性别)
 	不会出现在where条件中的字段不应该创建索引，索引就是为了提高条件查询的速度，若不是查询条件则没有意义呀。
 	
+21. SQL执行顺序如下：
+	1. from
+	2. join
+	3. on
+	4. where
+	5. group by
+	6. avg(), sum()...
+	7. having
+	8. select 
+	9. distinct
+	10. order by
 	
 
 
