@@ -39,11 +39,45 @@ IO流四步：第一步：获取位置！第二步：建立管道！第三步：
 				对象输出流：ObjectOutputStream
 
 		(3). 自定义流(程序员定义的基于节点流衍生的流)
+3. Java中保存数据有两种方式：
+	(1). 用序列化。将被序列化的对象写到文件中。然后你就可以让你的Java程序去读取存储到文件当中的序列化的对象，恢复成原来的对象。
+	FileOutputStream fileStream = new FileOutputStream("MyStream.ser");	// 建立文件字节输出流
+	ObjectOutputStream os = new ObjectOutputStream(fileStream);	// 建立对象输出流，并连接文件字节输出流
+	os.writeObject(characterOne);	// 将charaterOne对象写入，对象会被打成串流送到FileOutputStream来写入文件。
+	os.writeObject(characterTwo);	
+	os.writeObject(characterThree);
+	os.close();	// 关闭流，只要关闭了对象输出流，也会关闭与其连接的文件字节输出流。
+ 
+	当对象被序列化时，被该对象的实例变量所引用的所有对象也会被序列化。(序列化会将对象版图上的所有东西都存储起来)。如果没有被声明transient的实例变量所引用的对象没有实现Serializable,那么序列化时就会抛出异常。 
+	(2). 写一个纯文本文件。用其他程序可以解析的特殊字符写到文件中。例如写成用tab字符来分隔的档案以便让电子表格或者数据库应用程序能够应用。
+	FileWriter writer = new FileWriter("Foo.txt");
+	writer.write("hello foo!");
+	writer.close();
 
-
-
-
-
+4. 利用缓冲流保存和读取数据。
+(1) 利用缓冲流保存数据
+	File file = new File("D:\\Java教程\\缓冲流练习.txt");
+	FileWriter w = new FileWriter(file);
+	BufferedWriter bw = new BufferedWriter(w);
+	bw.writer("日照香炉生紫烟");
+	bw.writer("遥看瀑布挂前川");
+	bw.writer("飞流直下三千尺");
+	bw.writer("疑是银河落九天");
+	bw.close();
+ps: 缓冲流自带缓冲区，每次写入的数据是先写入到缓冲区中！
+(1). 当缓冲区的数据达到缓冲 区容量极限时，系统会自动将缓冲区的数据写入到硬盘中！
+(2). 手动调用flush()方法可以直接刷新缓冲区，将缓冲区数据写入到文档中！bw.flush();
+(3). 直接调用close()方法关闭流，关闭之前也会将缓冲区的数据写入到文档中！
+		
+(2) 利用缓冲流读取数据
+	File file = new File("D:\\Java教程\\缓冲流练习.txt");
+	FileReader r = new FileReader(file);
+	BufferedReader br = new BufferReader(r);
+	String line = null;
+	while((line = br.reader()) != null) {
+	    System.out.println(line);
+	}
+	br.close();
 
 
 
