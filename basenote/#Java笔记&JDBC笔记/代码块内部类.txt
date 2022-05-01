@@ -31,6 +31,26 @@
 		构造器语句；
 	}
 
+4. 对象创建的流程分析
+class  Person{
+    int age = 90;
+    String name;
+    Person(String n, int a) {
+        name = n;
+        age = a;
+    }
+}
+Person p = new Person("小倩", 20);
+流程分析：
+    1. 加载Person类信息(Person.class)，只会加载一次
+    2. 在堆中分配空间(地址)
+    3. 完成对象初始化
+	3.1 默认初始化 age = 0 name = null
+	3.2 显式初始化 age = 90, name = null
+	3.3 构造器的初始化 age = 20, name = "小倩"
+    4. 将对象在堆中的地址返回给 p，p中保存的是对person对象的引用。
+
+
 内部类
 
 1. 定义在外部类局部位置上（比如方法内）
