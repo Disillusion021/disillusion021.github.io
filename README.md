@@ -16,6 +16,16 @@
 
 <!-- tabs:start -->
 
+## **Blog**
+
+> <a href="./notebook/Blog/java中list.clear()和list = null对于GC有没有帮助？.html">java中list.clear()和list = null对于GC有没有帮助？</a>
+>
+> <a href="./notebook/Blog/MySQL 随机查询 解决方案.html">MySQL 随机查询 解决方案</a>
+>
+> <a href="./notebook/Blog/Swagger 2.9.2版本 启动异常 java.lang.NumberFormatExcepti.html">Swagger 2.9.2版本 启动异常 java.lang.NumberFormatException: For input string: "" </a>
+>
+> <a href="./notebook/Blog/为什么要显示声明serialVersionUID？.html">为什么要显示声明serialVersionUID？</a>
+
 ## **Java**
 
 > <a href="./notebook/Java/反射.html">反射</a>
@@ -35,10 +45,14 @@
 > <a href="./notebook/Web/SpringMVC笔记.html">SpringMVC笔记</a>
 >
 > <a href="./notebook/Web/MVC思想.html">MVC思想</a>
+>
+> <a href="./notebook/Web/事务.html">事务</a>
 
 ## **Git**
 
 > <a href="./notebook/Git/Git.html">Git</a>
+>
+> <a href="./notebook/Git/Maven.html">Maven</a>
 
 ## **Vim**
 
