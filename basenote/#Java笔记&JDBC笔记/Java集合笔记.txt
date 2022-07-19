@@ -104,7 +104,6 @@
 16. HashMap底层实现原理？(☆☆☆☆)
 	HashMap底层其实是由一个数组 + 链表 + 红黑树的结构构成！在1.7版本之前，HashMap仅仅由数组 + 链表构成，1.8版本后对HashMap进行了革新！
 	HashMap之所称为HashMap是因为底层是通过Hash算法实现！
-	如图所示：
 
 
 ArrayList 线程不安全但效率高，如果是有参构造按1.5倍扩容，如果是无参，则第一次是10，第二次开始按1.5倍扩容
@@ -113,8 +112,14 @@ LinkedList 底层是双端链表，增加和删除效率高，查找和修改Arr
 LinkedList 底层维护了一个双向链表，LinkedList中维护了两个属性first和last分别指向 首节点和尾节点。每个节点(Node对象)里面又维护了prev、next、item三个属性，其中通过prev指向前一个，通过next指向后一个节点。最终实现双向链表。
 HashSet集合底层是 数组 + 链表
 HashSet底层其实是HashMap, HashMap的底层是数组+链表+红黑树的数据结构
-	
-	
+
+1. HashSet底层是HashMap
+2. 添加一个元素时，先得到hash值，会转成索引值
+3. 找到存储数据表table(数组+链表)，看这个索引位置是否已经存放有元素
+4. 如果没有，直接加入
+5. 如果有，调用equals比较(hashcode,==,equals),如果相同，就放弃添加，如果不相同，则添加到最后
+6. 在Java8中，如果一条链表的元素个数超过TREEIFY_THRESHOLD（默认是8），并且table的大小>=MIN_TREEIFY_CAPACITY（默认64），就会进行树化(红黑树)
+7. 如果一条链表的元素个数超过8个，但是table的大小没到64个，那么会将table数组二倍扩容。
 
 
 		 
