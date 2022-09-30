@@ -8,6 +8,7 @@ set scrolloff=5
 
 " Do incremental searching.
 set incsearch
+set hlsearch
 
 " Don't use Ex mode, use Q for formatting.
 map Q gq<CR>
@@ -16,7 +17,7 @@ map Q gq<CR>
 imap jk <Esc>
 imap kj <Esc>
 nnoremap <space><space> :action ToggleDistractionFreeMode<CR>
-set timeoutlen = 500
+set timeoutlen = 300
 
 " wyn自定义vim配置
 " //基本配置
@@ -38,8 +39,6 @@ nnoremap Y y$
 set surround
 " 开启参数编辑插件
 set argtextobj
-" 多光标插件
-set multiple-cursors
 " easyMotion 模拟，额外依赖插件：AceJump,IdeaVim-EasyMotion
 nmap s :action KJumpAction<cr>
 
@@ -70,8 +69,6 @@ nnoremap <leader>fa :action FindInPath<CR>
 nnoremap <leader>gc :action GotoClass<CR>
 " 跳转文件
 nnoremap <leader>gf :action GotoFile<CR>
-" 跳转声明
-nnoremap <leader>gS :action GotoSymbol<CR>
 " 跳转命令
 nnoremap <leader>ga :action GotoAction<CR>
 " 跳转到定义
@@ -93,13 +90,13 @@ nnoremap gh ^
 " 行尾 go last
 nnoremap gl $
 " 跳转上个方法开始
-nnoremap [ [m
+nnoremap { [m
 " 跳转下个方法开始
-nnoremap ] ]m
+nnoremap [ ]m
 " 跳转上个方法结束
-nnoremap { [M
+nnoremap } [M
 " 跳转下个方法结束
-nnoremap } ]M
+nnoremap ] ]M
 
 " //Window Operation
 nnoremap <Leader>ww <C-W>w
@@ -143,11 +140,6 @@ nnoremap <Leader>rp :action ManageRecentProjects<CR>
 " nnoremap k kzz
 nnoremap <C-j> <C-d>
 nnoremap <C-k> <C-u>
-" 查找到的内容居中
-nnoremap n n
-nnoremap N N
-nnoremap * *
-nnoremap # #
 " 打开所有折叠
 nnoremap zr zR
 " 关闭所有折叠
