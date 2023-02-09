@@ -1,3 +1,7 @@
+实例对象的隐式原型__proto__等于构造函数的显式原型prototype
+函数的显式原型prototype指向的对象：默认是一个空的Object实例对象
+所有函数都是Function()的实例(包含Function()本身)
+Function()函数构建它自己。因为Function()的__proto__属性和prototype属性都指向Function.prototype。
 第一章 初识javascript
 0、Json字符串和Json对象的互相转化
 	Json对象 => Json字符串	JSON.stringify();
@@ -36,7 +40,31 @@
 	}
 	
 	- 方法的参数：形式参数
-	
+
+	5.1 函数调用方式
+	1. fn1() or obj.fn1() 用括号调用
+	2. fn1.call(obj1) // 等价于 obj1.fn1(), obj1中没有fn1函数也可以这样调用， 可以让一个函数成为指定对象的方法进行调用
+	funciton fn1() {
+		this.xxx = 'wyn'
+	}
+	var obj1 = {}
+	fn1.call(obj1)
+	console.log(obj1.xxx)
+	3. new fn1() 调用，this指的是被new出来的对象
+
+	5.2 回调函数
+	官方定义:
+	将函数作为实参传入另一函数。并在该外部函数内被调用。分为同步回调和异步回调。
+	解释定义:
+	1）你定义的 2）你没有调 3）但最终它执行了。
+	特点:
+	在大多数编程语言中，函数的形参总是由外往内向函数体传递参数，但在JS里如果形参是关键字"callback"则完全相反，它表示函数体在完成某种操作后由内向外调用某个外部函数。
+
+	5.3常见的回调函数
+	1) dom事件回调函数		
+	2) 定时器回调函数		
+	3) ajax请求回调函数		
+	4) 生命周期回调函数
 6、JavaScript的兼容性问题： 并不是所有浏览器都识别JavaScript。   chrome和火狐
 
 			一段JS代码   IE6		IE8		IE10		猎豹		360		QQ		......  
@@ -54,9 +82,12 @@
 7、网页换肤：
 	- html : html的结构、样式、行为三者分离吗，如何抽离样式！
 		<link href="" rel="stylesheet" type=""/>
-	
+	<link href="Theme/2021_/Css_/css_.css" rel="stylesheet" type="text/css" />
+	href: 标识链接的url
+	rel: 表示与链接对象的关系
+	type: 表示MIME类型
+
 	- 任何标签的任何属性，都可以修改 
-	
 	- HTML里怎么写，JS里就怎么写 
 
 第二章 初探JavaScript魅力 - 2
@@ -74,7 +105,7 @@
 	
 3、如何访问属性：
 	- 属性是什么，对象.属性
-	- 属性是标准-分离不同单词，访问，-对应驼峰命名法
+	- 属性是标准 -分离不同单词，访问，-对应驼峰命名法
 		比如 background-color 在js中访问时必须用驼峰命名法访问。e.g. odiv.style.backgroundColor = 'red';
 	- class : 是js的关键字   .className
 	
@@ -202,8 +233,16 @@
 		java：true、false
 		
 		前端：
-			真：true、非0、非空字符串、非空对象
+			真：true、非0、非空字符串、非空对象、[]
 			假：false、0、''、null 、undefined
+			0 == false true		false会转化成0做比较
+			'' == false true	false会转化成0做比较，''也会转化成0做比较。'' == 0 '' == false
+			'0' == false true	false会转化成0做比较，'0'也会转化成数字0做比较
+			'[]' == false true  false会转化成0做比较，[]空数组也会转化成数字0做比较
+			Boolean('0') true	非空字符串为true，空字符串为false
+			Boolean([]) true	对象用于判断条件都为true
+		结论:
+			js做比较都会优先转化为数字去比较
 8、Json：（Jackson） 非常非常非常非常的重要。前端和后台进行交流的一种数据格式！
 		var a = {
 			name : '张三',

@@ -104,22 +104,38 @@
 16. HashMap底层实现原理？(☆☆☆☆)
 	HashMap底层其实是由一个数组 + 链表 + 红黑树的结构构成！在1.7版本之前，HashMap仅仅由数组 + 链表构成，1.8版本后对HashMap进行了革新！
 	HashMap之所称为HashMap是因为底层是通过Hash算法实现！
+	如图所示：
 
 
 ArrayList 线程不安全但效率高，如果是有参构造按1.5倍扩容，如果是无参，则第一次是10，第二次开始按1.5倍扩容
 Vector 线程安全但效率不高，如果是无参，默认为10，满后，就按2倍扩容，如果直接指定大小则每次都按2倍扩容
 LinkedList 底层是双端链表，增加和删除效率高，查找和修改ArrayList效率高，另外线程也不安全
 LinkedList 底层维护了一个双向链表，LinkedList中维护了两个属性first和last分别指向 首节点和尾节点。每个节点(Node对象)里面又维护了prev、next、item三个属性，其中通过prev指向前一个，通过next指向后一个节点。最终实现双向链表。
-HashSet集合底层是 数组 + 链表
-HashSet底层其实是HashMap, HashMap的底层是数组+链表+红黑树的数据结构
-
+HashSet集合底层是 数组 + 链表，HashMap的底层是数组+链表+红黑树的数据结构
+当它的链表到达一定量的时候，而且满足数组的大小在某一个范围的时候它就会把这个链表进行一个树化，变成一颗红黑树。
 1. HashSet底层是HashMap
-2. 添加一个元素时，先得到hash值，会转成索引值
-3. 找到存储数据表table(数组+链表)，看这个索引位置是否已经存放有元素
-4. 如果没有，直接加入
-5. 如果有，调用equals比较(hashcode,==,equals),如果相同，就放弃添加，如果不相同，则添加到最后
-6. 在Java8中，如果一条链表的元素个数超过TREEIFY_THRESHOLD（默认是8），并且table的大小>=MIN_TREEIFY_CAPACITY（默认64），就会进行树化(红黑树)
-7. 如果一条链表的元素个数超过8个，但是table的大小没到64个，那么会将table数组二倍扩容。
+2. HashSet添加一个元素时，先得到hash值->转换成->索引值
+3. 找到存储数据表table，看这个索引位置是否已经存放有元素
+4. 如果这个索引位置没有元素，直接扔进去
+5. 如果有元素，调用equals比较，如果相同，就放弃添加，如果不相同，则添加到最后
+6. 在Java8中，如果一条链表的元素个数到达TREEIFY_THRESHOLD(默认是8)，
+	并且table的大小 >= MIN_TREEIFY_CAPACITY(默认64)，就会树化。 
+    如果链表个数到了8个，但是table数组size还没到64，它会先把table表进行扩容，按两倍扩容。	
+
+HashSet的扩容和转成红黑树机制
+1. HashSet底层是HashMap,第一次添加时，table数组扩容到16，临界值(threshod)是16*加载因子(loadFactor)0.75=12
+2. 如果table数组使用到了临界值12，就会扩容到16*2=32, 新的临界值就是32*0.75=24，依次类推
+3. 在Java8中，如果一条链表的元素个数到达 TREEIFY_THRESHOLD(默认是8)，并且table的大小 >= MIN_TREEIFY_CAPACITY(默认64)，
+	就会进行树化(红黑树)，否则仍然采取数组扩容机制
+
+LinkedHashSet讲解
+1. LinkedHashSet 中维护了一个hash表和双向链表
+2. 每一个节点有pre和next属性，这样可以形成双向链表
+3. 在添加一个元素时，先求hash值，再求索引，确定钙元素在hashtable的位置，然后将添加的元素加入到双向链表(如果已经存在)，不添加(原则和hashSet一样)
+	tail.next = newElement;
+	newElement.pre = tail;
+	tail = newElement;
+4. 这样的话，我们遍历LinkedHashSet 也能确保插入顺序和遍历顺序一致
 
 
 		 
