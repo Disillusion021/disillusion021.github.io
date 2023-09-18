@@ -1,7 +1,68 @@
+一、原型链
 实例对象的隐式原型__proto__等于构造函数的显式原型prototype
 函数的显式原型prototype指向的对象：默认是一个空的Object实例对象
-所有函数都是Function()的实例(包含Function()本身)
+所有函数的原型对象prototype都是Object的实例对象
+所有函数都是Function()的实例(包含Function()本身) => 所有函数的__proto__属性都是Function.prototype。
 Function()函数构建它自己。因为Function()的__proto__属性和prototype属性都指向Function.prototype。
+A instanceof B, 如果B对象的protoType在A对象的原型链(__proto__链)上,那么就说 A instanceof B。 
+
+二、变量提升
+变量声明提升
+	通过var定义的变量,在定义语句之前就可以访问到
+	值: undefined
+函数声明提升
+	通过function声明的函数,在声明之前就可以直接调用
+	值: 函数定义(对象)
+
+三、全局上下文和函数上下文
+js全局上下文和函数上下文
+全局上下文就是window,先变量提升,后函数提升,然后this = window, 然后执行全局代码
+函数上下文在函数执行时创建,先赋值形参,再变量提升,再函数提升,this = 调用函数的值, 然后执行函数内代码
+
+四、全局作用域和函数作用域
+js全局作用域和函数作用域,js作用域是静态的,在编写时就决定好了.
+js内部作用域可以访问外部作用域的变量(即内部嵌套函数可以访问外层函数定义的变量),
+而函数外部不能访问函数内部的变量.
+
+五、闭包
+js闭包是包含被引用变量(*定义在外层函数作用域里,但是被内部函数引用的变量*)的对象Closure,
+闭包能将这些*变量始终保存在内存中,以供外部函数使用.
+闭包的主要作用,可以读取函数内部变量.
+
+比较直白的来理解闭包概念：
+形成闭包的条件：
+1. 内外2层函数
+2. 内部函数中使用了父函数的变量
+内部的私有变量外界可以引用，但无法改变，且不轻易被销毁
+
+e.g.
+// 闭包函数是指showNum,闭包函数的内部嵌套函数的作用域有两个组成部分, 
+// Scopes[2]: 分别是Closure{内部函数引用的外部函数定义的变量:变量值}
+// 和 Global(全局作用域定义的变量(window,document等): 变量值)
+// showNum2函数中的Scopes[2] = Scopes[{num:12}, {window:window, document:document,...}]
+// this在函数中永远指向函数的调用者,本例中showNum2由myNum()调用,因此this为window.
+ function showNum() {
+      var num = 12;
+      function showNum2() {
+           console.log(++num);
+      };
+      return showNum2;
+  }
+var myNum = showNum();
+myNum();//13
+上述例子中体现了闭包的主要作用: 
+1. 函数外部读取到了函数内部定义的变量; 
+2. 将函数内部定义的变量始终保存在内存中.
+   一般情况下,在函数被调用完后不在被引用时,该函数都会被垃圾回收回收,
+   但是由于上述代码中函数showNum2被myNum引用,而函数showNum2又依赖于函数showNum,
+   因此函数showNum的栈空间不会被垃圾回收机制回收.
+
+六、嵌套函数和λ表达式的this
+this在λ表达式里与外部作用域的this一致,
+this在函数嵌套调用的时候非常容易不一样,一般用var that = this解决
+所以一般可以用普通函数嵌套λ表达式函数再一直嵌套λ表达式函数,就不会发生this改变的问题
+
+	
 第一章 初识javascript
 0、Json字符串和Json对象的互相转化
 	Json对象 => Json字符串	JSON.stringify();
@@ -292,29 +353,47 @@ Function()函数构建它自己。因为Function()的__proto__属性和prototype
 	
 	声明：
 		var a = [3,4,5,67];
+		var a = new Array(2); // 声明一个长度为2的数组
 	访问：
 		数组[下标]
-	操作数组方法：
+	操作数组方法： https://www.cnblogs.com/chyingp/archive/2012/12/10/js_array.html
 		- 添加方法：
-			数组.push(值) 			尾部追加
+			数组.push(值) 			尾部追加, 返回修改后的数组传唱度
 			数组.unshift(值)			头部追加
 		- 数组元素的删除：
-			数组.pop()				从尾部删除一个元素（弹出元素）
+			数组.pop()				从尾部删除一个元素（弹出元素）,并返回这个元素
 			数组.shift()				从头部删除一个元素
 		- sort函数：自学（并不是特别的重要）
 		
-		- concat(数组): 会将两个数组连成一个数组形成一个新的数组
-			数组1.concat(数组2) : 有返回值
+		- concat(数组): 会将两个数组连成一个数组形成一个新的数组,不修改原数组
+			数组1.concat(数组2) : 有返回值,返回连接后的数组,如果不传参，则返回一个原数组的拷贝
 		
 		- join(字符串) : 加入、连接
 			数组.join(字符串) 返回值为字符串
 		- split(字符串)
+		- reverse() : 排序反转，注意会修改原数组
 		
-		- splice(参数列表) ： 重载函数、删除插入的
+		- splice(参数列表) ： 重载函数、删除并插入, 从下标开始删除多少个长度的元素，并插入元素
 			splice(下标,长度,元素...)
-			
 			splice(下标,长度) ： 删除
-			
+		- slice, 不修改原数组
+		var arr = [1, 2, 3];
+		arr.slice(0 ,2); //输出 [1, 2]，此时arr=>[1, 2, 3]
+		arr.slice(-2, -1);  //输出 [2]
+		arr.slice(1);  //输出 [2, 3]
+		arr.slice(); // 与concat()一样可以用来浅拷贝一个数组
+		var newArr = Object.assign([], arr); // 浅拷贝一个数组
+		var newObj = Object.assign({}, obj); // 浅拷贝一个对象
+		- toString() 将数组转化为逗号分割字符串
+		- 浅拷贝 concat(), slice(), Object.assign()
+		Object.assign()方法的第一个参数是目标对象，后面的参数都是源对象，
+		var obj = {};
+		var o1 = { a: 1 };
+		var o2 = { b: 2, a: 2};
+		var obj = Object.assign(obj, o1, o2);
+		console.log(obj); // { a: 2, b: 2 }	
+		- 深拷贝
+		var obj2 = JSON.parse(JSON.stringify(obj))//深拷贝常用方法
 第五章 定时器 : 定义一个时间窗（周期），反复执行一段代码
 	- 间隔性定时器 ： 每隔时间窗周期就会执行一遍代码
 		setInterval(函数,时间窗（毫秒为单位）) 返回的是一个 定时器对象;

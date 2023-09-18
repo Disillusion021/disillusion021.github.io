@@ -106,7 +106,32 @@ where 筛选条件
 */
 
 
+-- 查询每个用户最近一次的贷款记录
+CREATE TABLE `loan` (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `name` varchar(31) DEFAULT NULL COMMENT '姓名',
+  `money` decimal(10,2) DEFAULT NULL COMMENT '金额',
+  `loan_date` datetime DEFAULT NULL COMMENT '借贷日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='借贷表';
+INSERT INTO loan
+VALUES
+	( null, 'P1', 500, '2023-10-01' ),
+	( null, 'P1', 1500, '2023-10-02' ),
+	( null, 'P1', 1000, '2023-10-05' ),
+	( null, 'P2', 700, '2023-10-03' ),
+	( null, 'P2', 1500, '2023-10-05' ),
+	( null, 'P2', 1000, '2023-01-07' ),
+	( null, 'P3', 1500, '2023-10-05' ),
+	( null, 'P3', 5000, '2023-01-06' );
+-- 方式一:
+select * from loan l1 where loan_date = 
+(select max(loan_date) from loan l2 where l1.name = l2.name);
 
+-- 方式二:
+select l1.* from loan l1 join
+(select `name`, max(loan_date) md from loan GROUP BY `name`) l2
+on l1.name = l2.name and l1.loan_date = l2.md;
 
 
 

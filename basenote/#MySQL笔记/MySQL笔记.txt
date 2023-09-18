@@ -170,9 +170,17 @@
 
 	频繁作为查询条件的字段适合创建索引，频繁更新的字段不适合创建索引(如访问次数)。
 	唯一性太差的字段不适合单独创建索引(如性别)
-	不会出现在where条件中的字段不应该创建索引，索引就是为了提高条件查询的速度，若不是查询条件则没有意义呀。
+	不会出现在where条件或order by中的字段不应该创建索引，索引就是为了提高条件查询的速度，若不是查询条件或排序字段则没有意义呀。
+
+21. 索引语法
+	创建索引
+	CREATE [UNIQUE|FULLTEXT] INDEX index_name ON table_name (index_col_name,...);
+	查看索引
+	SHOW INDEX FROM table_name
+	删除索引
+	DROP INDEX index_name ON table_name
 	
-21. SQL执行顺序如下：
+22. SQL执行顺序如下：
 	1. from
 	2. join
 	3. on

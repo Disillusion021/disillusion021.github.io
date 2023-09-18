@@ -4,7 +4,7 @@
 "" -- Suggested options --
 " Show a few lines of context around the cursor. Note that this makes the
 " text scroll if you mouse-click near the start or end of the window.
-set scrolloff=5
+" set scrolloff=5
 
 " Do incremental searching.
 set incsearch
@@ -41,9 +41,15 @@ set surround
 set argtextobj
 " easyMotion 模拟，额外依赖插件：AceJump,IdeaVim-EasyMotion
 nmap s :action KJumpAction<cr>
+" 开启快速移动插件
+set quickscope
+" 设置快速注释
+set commentary
 
 " 设置前置leader键
 let mapleader = ","
+" 切换单词 camelCase
+nnoremap <leader>u :action de.netnexus.CamelCasePlugin.ToggleCamelCase<CR><Esc>
 " 系统剪贴板复制
 nnoremap <leader>c "+y
 vnoremap <leader>c "+y
@@ -63,14 +69,22 @@ nnoremap <leader>p mpviw"+p`o`p
 nnoremap <leader>/ :action Replace<CR>
 nnoremap <leader>fd :action Find<CR>
 nnoremap <leader>fa :action FindInPath<CR>
+" Select All Occurrence, c-a-j 选择下一个
+nnoremap <leader>sa :action SelectAllOccurrences<CR>
+" Alibaba 代码规约检查
+nnoremap <leader>al :action AliP3CInspectionAction<CR>
 
 " //跳转类快捷键
+" 跳转到终端
+nnoremap <leader>gg :action ActivateTerminalToolWindow<CR>
 " 跳转类
-nnoremap <leader>gc :action GotoClass<CR>
+nnoremap <leader>gn :action GotoClass<CR>
 " 跳转文件
 nnoremap <leader>gf :action GotoFile<CR>
-" 跳转命令
-nnoremap <leader>ga :action GotoAction<CR>
+" 跳转符号
+nnoremap <leader>ga :action GotoSymbol<CR>
+" 跳转到数据库
+nnoremap <leader>gm :action GotoDatabaseObject<CR>
 " 跳转到定义
 nnoremap <leader>gd :action GotoDeclarationOnly<CR>
 " 跳转到实现
@@ -79,12 +93,6 @@ nnoremap <leader>gi :action GotoImplementation<CR>
 nnoremap <leader>gs :action GotoSuperMethod<CR>
 " 跳转到测试
 nnoremap <leader>gt :action GotoTest<CR>
-" 查找使用
-nnoremap <leader>fu :action FindUsages<CR>
-" 查找使用(当前文件)
-nnoremap <leader>ff :action FindUsagesInFile<CR>
-" 显示使用
-nnoremap <leader>su :action ShowUsages<CR>
 " 行首 go head
 nnoremap gh ^
 " 行尾 go last
@@ -94,13 +102,13 @@ nnoremap gk 5k
 " 下移5行
 nnoremap gj 5j
 " 跳转上个方法开始
-nnoremap { [m
-" 跳转下个方法开始
 nnoremap [ ]m
-" 跳转上个方法结束
-nnoremap } [M
-" 跳转下个方法结束
+" 跳转下个方法开始
 nnoremap ] ]M
+" 跳转上个方法结束
+nnoremap { [m
+" 跳转下个方法结束
+nnoremap } [M
 
 " //Window Operation
 nnoremap <Leader>ww <C-W>w
@@ -130,6 +138,8 @@ nnoremap <Leader>8 8gt
 nnoremap <Leader>9 9gt
 " 关闭标签页
 nnoremap <leader>x :action CloseContent<CR>
+" 关闭右侧标签页
+nnoremap <space>x :action CloseAllToTheRight<CR>
 " 打开标签页
 nnoremap <leader>X :action ReopenClosedTab<CR>
 " 最近标签页
@@ -146,21 +156,42 @@ nnoremap <Leader>rl :action RecentLocations<CR>
 " nnoremap k kzz
 nnoremap <C-j> <C-f>
 nnoremap <C-k> <C-b>
-" 打开所有折叠
+" zo, 打开所有折叠
 nnoremap zr zR
-" 关闭所有折叠
+" zc, 关闭所有折叠
 nnoremap zm zM
 
 " //显示界面
 " 显示类图
 nnoremap <Leader>sdd :action ShowUmlDiagram<CR>
 nnoremap <Leader>sdp :action ShowUmlDiagramPopup<CR>
+" 显示类继承关系
+nnoremap <leader>sh :action TypeHierarchy<CR>
+" 显示方法继承关系
+nnoremap <leader>mh :action MethodHierarchy<CR>
+" 显示类结构
+nnoremap <leader>ss :action ActivateStructureToolWindow<CR>
 " 显示文件结构
-nnoremap <Leader>ss :action FileStructurePopup<CR>
+nnoremap <Leader>. :action FileStructurePopup<CR>
+
+" 显示调用
+nnoremap <leader>gu :action ShowUsages<CR>
+" 显示方法调用
+nnoremap <leader>su :action CallHierarchy<CR>
+" 查找使用
+nnoremap <leader>fu :action FindUsages<CR>
+" 查找使用(当前文件)
+nnoremap <leader>ff :action FindUsagesInFile<CR>
+
 " 显示右键菜单
 nnoremap <leader>sm :action ShowPopupMenu<CR>
+" 显示git菜单
+nnoremap <leader>sg :action Vcs.QuickListPopupAction<CR>
+" 显示断点菜单
+nnoremap <leader>sb :action ViewBreakpoints<CR>
 " 显示文件路径
 nnoremap <leader>sf :action ShowFilePath<CR>
+
 
 " //重构
 " 重构工具
@@ -169,7 +200,7 @@ nnoremap <leader>rr :action Refactorings.QuickListPopupAction<CR>
 nnoremap <leader>rv :action IntroduceVariable<CR>
 " 提取方法
 nnoremap <leader>rm :action ExtractMethod<CR>
-" <leader>r 重命名(shift+F6)
+" 重命名(shift+F6)
 nnoremap <leader>rn :action RenameElement<CR>
 " <leader>W 用来删除当前文件所有行尾多余空格
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
@@ -189,7 +220,7 @@ vnoremap <S-A-k> :m '<-2<CR>gv=gv
 "map \r <Action>(ReformatCode)
 
 "" Map <leader>d to start debug
-map <leader>d <Action>(Debug)
+map <leader>d <Action>(DebugClass)
 
 "" Map <leader>b to toggle the breakpoint on the current line
 map <leader>b <Action>(ToggleLineBreakpoint)
@@ -199,7 +230,7 @@ map <leader>b <Action>(ToggleLineBreakpoint)
 " Quit normal mode
 
 " IDEA VIM 命令兼容设置
-sethandler <C-A> a:ide
+sethandler <C-A> a:vim
 sethandler <C-B> a:vim
 sethandler <C-C> a:ide
 sethandler <C-D> a:vim

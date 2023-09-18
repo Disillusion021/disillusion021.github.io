@@ -249,16 +249,20 @@ Html5规范中， script 的 type 属性默认是 text/javascript
 	- 居中：
 		- 水平居中：
 			- 元素居中：
-				- 行级元素： margin: 上下 auto;
+				- 行级元素： margin: 上下 auto; 将要居中的块(行)级元素margin左右设为auto 实现水平居中, 
+							注意: 该元素必须有宽度才能设置margin,不设置宽度默认会继承父盒子的宽度,自然达不到在父盒子中水平居中的效果.
 				- 内联元素: 
 					- 内联外部改成行级元素，然后用margin来居中
-					- 包裹内联元素的父元素可以设置text-align或者<center></center>
+					- 包裹内联元素的父元素可以设置text-align:center或者<center></center>
 			- 元素内部的文本居中
 				- text-align： left和right、center
-				
 			- <center></center> 用它包裹文本也好，标签也好，都可以水平居中
 		- 垂直居中： 元素内部文本垂直居中
-			- line-height:设置行高和图层高度一致即可垂直居中
+			- line-height:设置行高和图层高度一致即可垂直居中 line-height = height
+			- 不给父盒子设置高度，给父盒子设置上下padding padding: 20px 0; 让子盒子撑开父盒子的高度
+		https://blog.csdn.net/catascdd/article/details/109093376
+		深度选择器: scoped样式下 改变当前父组件下子组件的元素样式,且不影响其他使用到该子组件的页面
+		https://juejin.cn/post/7023343999909888037
 	- 高度和宽度：
 		- width: 100px;		1%,100%;
 		
