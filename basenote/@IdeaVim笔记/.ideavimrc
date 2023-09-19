@@ -16,6 +16,8 @@ map Q gq<CR>
 " Esc jk
 imap jk <Esc>
 imap kj <Esc>
+" 可视模式
+nnoremap <A-v> <C-v>
 nnoremap <space><space> :action ToggleDistractionFreeMode<CR>
 set timeoutlen = 300
 
@@ -98,9 +100,9 @@ nnoremap gh ^
 " 行尾 go last
 nnoremap gl $
 " 上移5行
-nnoremap gk 5k
+nnoremap <C-k> 5k
 " 下移5行
-nnoremap gj 5j
+nnoremap <C-j> 5j
 " 跳转上个方法开始
 nnoremap [ ]m
 " 跳转下个方法开始
@@ -154,8 +156,8 @@ nnoremap <Leader>rl :action RecentLocations<CR>
 " //翻页操作
 " nnoremap j jzz
 " nnoremap k kzz
-nnoremap <C-j> <C-f>
-nnoremap <C-k> <C-b>
+nnoremap <C-A-j> <C-f>
+nnoremap <C-A-k> <C-b>
 " zo, 打开所有折叠
 nnoremap zr zR
 " zc, 关闭所有折叠
@@ -247,7 +249,7 @@ sethandler <C-N> a:ide
 sethandler <C-O> a:vim
 sethandler <C-P> a:ide
 sethandler <C-Q> a:ide
-sethandler <C-R> a:vim
+sethandler <C-R> a:ide
 sethandler <C-S> a:ide
 sethandler <C-T> a:vim
 sethandler <C-U> a:vim
@@ -258,5 +260,7 @@ sethandler <C-Y> a:ide
 sethandler <C-Z> a:ide
 sethandler <C-[> a:ide
 sethandler <C-]> a:ide
-sethandler <A-S-J> a:vim
+sethandler <C-\> a:ide
+sethandler <C-A-J> a:vim
+sethandler <C-A-K> a:vim
 set ideajoin
