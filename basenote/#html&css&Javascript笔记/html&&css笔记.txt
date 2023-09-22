@@ -250,7 +250,7 @@ Html5规范中， script 的 type 属性默认是 text/javascript
 		- 水平居中：
 			- 元素居中：
 				- 行级元素： margin: 上下 auto; 将要居中的块(行)级元素margin左右设为auto 实现水平居中, 
-							注意: 该元素必须有宽度才能设置margin,不设置宽度默认会继承父盒子的宽度,自然达不到在父盒子中水平居中的效果.
+							注意: 该元素必须有宽度设置margin才起作用,因为不设置宽度默认会继承父盒子的宽度,自然达不到在父盒子中水平居中的效果.
 				- 内联元素: 
 					- 内联外部改成行级元素，然后用margin来居中
 					- 包裹内联元素的父元素可以设置text-align:center或者<center></center>
@@ -290,7 +290,11 @@ Html5规范中， script 的 type 属性默认是 text/javascript
 		- display : block   块级元素（行级元素）
 		- display : inline	内联了
 		- div: div比较特殊, inline-block可以改成内联, inline不可以把div从行级改成内联元素。
-	- float : left 浮动方式改为向左浮动 所有块级元素都可以通过float改成内联
+	- float : left 浮动方式改为向左浮动 所有块级元素都可以通过float改成内联,并不是变成内联元素,只是变成float元素
+		float元素脱离DOM文档流,但是仍然占据空间. 普通div会与float元素重叠.但**BFC区域不会与float box重叠**.
+		float元素会导致高度塌陷,但**BFC区域高度会考虑float元素的高度**.
+		BFC: Block formatting context 一般用 overflow: hidden 来激活
+		BFC内部的元素上下边距不会发生重叠
 	
 	- cursor : 某一个元素修改cursor相当，当鼠标移入到当前元素的时候，鼠标的样式
 	
@@ -301,7 +305,16 @@ Html5规范中， script 的 type 属性默认是 text/javascript
 		left: 100px;
 		bottom: 100px;
 		
+	- 内联元素定义不了宽高和上下外边距,可以定义左右外边距. 内联元素的宽度是根据内容伸缩的,并且不会超过父盒子的宽度.
+	- 行内块元素inline-block: 可以设置宽高和上下左右外边距
+	https://segmentfault.com/a/1190000017058797
 
+
+12. CSS常见布局
+	- 两栏布局(左边固定右边自适应)
+	- 三栏布局(左右固定中间自适应)
+		- 流体布局(浮动)
+	
 
 ------------------------------------------------
 
