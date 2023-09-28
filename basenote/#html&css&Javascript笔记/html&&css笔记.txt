@@ -255,7 +255,7 @@ Html5规范中， script 的 type 属性默认是 text/javascript
 					- 内联外部改成行级元素，然后用margin来居中
 					- 包裹内联元素的父元素可以设置text-align:center或者<center></center>
 			- 元素内部的文本居中
-				- text-align： left和right、center
+				- text-align： left和right、center // 只能对块级或inline-block用
 			- <center></center> 用它包裹文本也好，标签也好，都可以水平居中
 		- 垂直居中： 元素内部文本垂直居中
 			- line-height:设置行高和图层高度一致即可垂直居中 line-height = height
