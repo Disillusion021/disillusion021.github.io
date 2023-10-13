@@ -29,7 +29,7 @@ set timeoutlen = 300
 " 显示相对行号
 set number relativenumber
 " 自动切换输入法，保存插入模式输入法状态
-set keep-english-in-normal-and-restore-in-insert
+" set keep-english-in-normal-and-restore-in-insert
 " 搜索时忽略大小写
 set ignorecase
 " 搜索时智能匹配大小写
@@ -168,8 +168,8 @@ nnoremap <Leader>rl :action RecentLocations<CR>
 " //翻页操作
 " nnoremap j jzz
 " nnoremap k kzz
-nnoremap <S-A-j> <C-f>
-nnoremap <S-A-k> <C-b>
+nnoremap <C-J> <C-f>
+nnoremap <C-K> <C-b>
 " zo, 打开所有折叠
 nnoremap zr zR
 " zc, 关闭所有折叠
@@ -254,14 +254,14 @@ sethandler <C-G> a:ide
 sethandler <C-H> a:ide
 sethandler <C-I> a:vim
 sethandler <C-J> a:vim
-sethandler <C-K> a:ide
-sethandler <C-L> a:ide
+sethandler <C-K> a:vim
+sethandler <C-L> a:vim
 sethandler <C-M> a:ide
 sethandler <C-N> a:ide
 sethandler <C-O> a:vim
 sethandler <C-P> a:ide
 sethandler <C-Q> a:ide
-sethandler <C-R> a:ide
+sethandler <C-R> a:vim
 sethandler <C-S> a:ide
 sethandler <C-T> a:vim
 sethandler <C-U> a:vim
@@ -278,6 +278,6 @@ sethandler <S-A-K> a:vim
 sethandler <C-A-J> a:ide
 sethandler <C-A-K> a:ide
 
-nnoremap <C-J> J
-vnoremap <C-J> J
+nnoremap <C-L> J
+vnoremap <C-L> J
 set ideajoin
