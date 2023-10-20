@@ -255,11 +255,15 @@ Html5规范中， script 的 type 属性默认是 text/javascript
 					- 内联外部改成行级元素，然后用margin来居中
 					- 包裹内联元素的父元素可以设置text-align:center或者<center></center>
 			- 元素内部的文本居中
-				- text-align： left和right、center // 只能对块级或inline-block用
+				- text-align： left和right、center // 只能对块级或inline-block用(块级元素内文本居中);内联元素也不需要用(宽度自动由文字撑开)
 			- <center></center> 用它包裹文本也好，标签也好，都可以水平居中
 		- 垂直居中： 元素内部文本垂直居中
-			- line-height:设置行高和图层高度一致即可垂直居中 line-height = height
-			- 不给父盒子设置高度，给父盒子设置上下padding padding: 20px 0; 让子盒子撑开父盒子的高度
+			- line-height:设置行高和图层高度一致即可垂直居中 line-height = height	(单行文本)
+			- 不给父盒子设置高度，给父盒子设置上下padding padding: 20px 0; 让子盒子撑开父盒子的高度 (父div中子div垂直居中)
+			- 父相子绝: top: 50%, left: 50%, transform: translate(-50%, -50%)
+			- flex和grid:
+				display: flex; align-items: center; justify-content: center;
+				display: grid; place-items: center;
 		https://blog.csdn.net/catascdd/article/details/109093376
 		深度选择器: scoped样式下 改变当前父组件下子组件的元素样式,且不影响其他使用到该子组件的页面
 		https://juejin.cn/post/7023343999909888037
@@ -313,28 +317,12 @@ Html5规范中， script 的 type 属性默认是 text/javascript
 12. CSS常见布局
 	- 两栏布局(左边固定右边自适应)
 	- 三栏布局(左右固定中间自适应)
-		- 流体布局(浮动)
-	
+	见代码库
 
-------------------------------------------------
+13. 图片缩放相关
+https://blog.csdn.net/allway2/article/details/120873097
 
-1、
-
-2、
-博客表
-主键		标题		博客内容		博主ID		类别ID		
-1		java	java是..		101			#1#2#3#
-博主表
-主键		博主名字
-101		诸葛亮
-201		司马懿
-类别表
-类别id	类别名称
-1		技术
-2		黑客
-3		安全
-4		框架
-5		前端
-
-service层定义方法得到一个博客信息
-博客标题、内容、博主名字、类别名称字符串
+14. 负数margin的意义(应用即可)
+一般来讲margin-left和margin-top设置为负数就是向左或向上位移, margin-right和margin-bottom是让后面的元素覆盖自身(不常用也最好别用)
+负数margin还有一个原则就是需要保持和原宽度相等.
+比如父div宽度800px,子div不设置宽度(默认等于父div的800px),然后子div设置margin-left: -200px, 则子div的content宽度就会增加200px变为1000px
